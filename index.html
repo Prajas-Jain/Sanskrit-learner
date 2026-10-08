@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sanskrit Learner</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>संस्कृत Learner</h1>
+    <p>Learn Sanskrit. Play. Master.</p>
+</header>
+
+
+<main>
+
+    <!-- HOME SCREEN -->
+
+    <section class="welcome" id="home-screen">
+
+        <div class="profile-bar">
+
+            <div>
+                ⭐ <span id="total-xp">0</span> XP
+            </div>
+
+            <div>
+                🏆 Level <span id="level">1</span>
+            </div>
+
+            <div>
+                🔥 <span id="streak">0</span> Day Streak
+            </div>
+
+        </div>
+
+
+        <h2>Welcome! 👋</h2>
+
+        <p>
+            Continue your Sanskrit learning journey.
+        </p>
+
+
+        <div class="progress-summary">
+
+            <div class="progress-card">
+
+                <span class="progress-number" id="completed-count">
+                    0
+                </span>
+
+                <span class="progress-label">
+                    Lessons Completed
+                </span>
+
+            </div>
+
+
+            <div class="progress-card">
+
+                <span class="progress-number">
+                    3
+                </span>
+
+                <span class="progress-label">
+                    Total Lessons
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button onclick="showLessons()">
+            Start Learning
+        </button>
+
+
+        <!-- BADGES -->
+
+        <div class="badges-section">
+
+            <h3>🏅 Your Badges</h3>
+
+            <div class="badges-container">
+
+                <div class="badge locked" id="badge-first">
+                    🌱
+                    <span>First Step</span>
+                </div>
+
+                <div class="badge locked" id="badge-xp">
+                    ⭐
+                    <span>XP Starter</span>
+                </div>
+
+                <div class="badge locked" id="badge-perfect">
+                    🎯
+                    <span>Perfect Score</span>
+                </div>
+
+                <div class="badge locked" id="badge-words">
+                    📖
+                    <span>Word Explorer</span>
+                </div>
+
+                <div class="badge locked" id="badge-grammar">
+                    🧩
+                    <span>Grammar Starter</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- LESSONS SCREEN -->
+
+    <section class="lessons" id="lessons-screen">
+
+        <div class="lesson-header">
+
+            <div>
+
+                <h2>Choose a Lesson</h2>
+
+                <p>
+                    Learn first, then test yourself.
+                </p>
+
+            </div>
+
+
+            <div class="xp-display">
+
+                ⭐ <span id="lesson-xp">0</span> XP
+
+            </div>
+
+        </div>
+
+
+        <div class="lesson-container">
+
+
+            <!-- BASIC WORDS -->
+
+            <div class="lesson-card">
+
+                <div class="lesson-icon">
+                    📖
+                </div>
+
+                <h3>Basic Words</h3>
+
+                <p>
+                    Learn common Sanskrit words,
+                    meanings and simple usage.
+                </p>
+
+                <div class="lesson-info">
+                    5 Learn + 5 Test
+                </div>
+
+                <div
+                    class="completion-status"
+                    id="words-status">
+
+                    Not Started
+
+                </div>
+
+                <button onclick="startLesson('words')">
+                    Start
+                </button>
+
+            </div>
+
+
+            <!-- BASIC NUMBERS -->
+
+            <div class="lesson-card">
+
+                <div class="lesson-icon">
+                    🔢
+                </div>
+
+                <h3>Basic Numbers</h3>
+
+                <p>
+                    Learn basic Sanskrit numbers
+                    and their meanings.
+                </p>
+
+                <div class="lesson-info">
+                    5 Learn + 5 Test
+                </div>
+
+                <div
+                    class="completion-status"
+                    id="numbers-status">
+
+                    Not Started
+
+                </div>
+
+                <button onclick="startLesson('numbers')">
+                    Start
+                </button>
+
+            </div>
+
+
+            <!-- BASIC GRAMMAR -->
+
+            <div class="lesson-card">
+
+                <div class="lesson-icon">
+                    🧩
+                </div>
+
+                <h3>Basic Grammar</h3>
+
+                <p>
+                    Understand simple Sanskrit
+                    grammar concepts.
+                </p>
+
+                <div class="lesson-info">
+                    5 Learn + 5 Test
+                </div>
+
+                <div
+                    class="completion-status"
+                    id="grammar-status">
+
+                    Not Started
+
+                </div>
+
+                <button onclick="startLesson('grammar')">
+                    Start
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- AI TUTOR -->
+
+        <div class="ai-tutor-card">
+
+            <div class="ai-tutor-icon">
+                🤖
+            </div>
+
+            <div class="ai-tutor-content">
+
+                <h2>AI Sanskrit Tutor</h2>
+
+                <p>
+                    Have a Sanskrit doubt?
+                    Ask your AI Tutor and get a
+                    simple explanation.
+                </p>
+
+            </div>
+
+            <button onclick="openAITutor()">
+                Ask AI Tutor →
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUIZ SCREEN -->
+
+    <section
+        class="quiz-screen"
+        id="quiz-screen">
+
+        <div class="quiz-box">
+
+            <div class="quiz-top">
+
+                <button
+                    onclick="goBackToLessons()"
+                    class="small-back">
+
+                    ← Lessons
+
+                </button>
+
+                <div id="mode-label">
+                    LEARN
+                </div>
+
+            </div>
+
+
+            <div class="progress-area">
+
+                <div class="progress-text">
+
+                    <span id="question-number">
+                        1 / 10
+                    </span>
+
+                    <span id="lesson-name">
+                        Basic Words
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div id="progress-fill"></div>
+
+                </div>
+
+            </div>
+
+
+            <div id="lesson-content">
+
+                <div class="word-display">
+
+                    <h2 id="question-text">
+                        जलम्
+                    </h2>
+
+                </div>
+
+
+                <p id="question-description">
+                    Water
+                </p>
+
+
+                <div id="options-container"></div>
+
+
+                <div id="learn-example"></div>
+
+
+                <button
+                    onclick="nextQuestion()"
+                    id="next-button">
+
+                    Next →
+
+                </button>
+
+            </div>
+
+
+            <div id="result"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULT SCREEN -->
+
+    <section
+        class="result-screen"
+        id="result-screen">
+
+        <div class="result-box">
+
+            <div class="trophy">
+                🎉
+            </div>
+
+            <h2>
+                Lesson Complete!
+            </h2>
+
+            <p id="final-message">
+                Great job!
+            </p>
+
+
+            <div class="final-score">
+
+                <div>
+
+                    <span id="final-score">
+                        0
+                    </span>
+
+                    / 5
+
+                </div>
+
+
+                <div>
+
+                    ⭐
+                    <span id="final-xp">
+                        0
+                    </span>
+
+                    XP
+
+                </div>
+
+            </div>
+
+
+            <div id="badge-earned"></div>
+
+
+            <button onclick="goBackToLessons()">
+
+                🏠 Back to Lessons
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI TUTOR SCREEN -->
+
+    <section
+        class="ai-tutor-screen"
+        id="ai-tutor-screen">
+
+        <div class="ai-tutor-box">
+
+
+            <!-- AI HEADER -->
+
+            <div class="ai-header">
+
+                <button
+                    onclick="closeAITutor()"
+                    class="small-back">
+
+                    ← Back
+
+                </button>
+
+
+                <div class="ai-title">
+
+                    <div class="ai-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            AI Sanskrit Tutor
+                        </h2>
+
+                        <span>
+                            Your Sanskrit learning assistant
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHAT -->
+
+            <div
+                class="chat-container"
+                id="chat-container">
+
+                <div class="chat-message tutor-message">
+
+                    <div class="message-avatar">
+                        🤖
+                    </div>
+
+                    <div class="message-content">
+
+                        <strong>
+                            AI Sanskrit Tutor
+                        </strong>
+
+                        <p>
+                            Namaste! 🙏
+                            Ask me any Sanskrit doubt
+                            and I will explain it simply.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="suggestion-area">
+
+                    <p>
+                        Try asking:
+                    </p>
+
+                    <button
+                        onclick="useSuggestion('रामः और रामम् में क्या difference है?')">
+
+                        रामः और रामम् में क्या difference है?
+
+                    </button>
+
+
+                    <button
+                        onclick="useSuggestion('सः और सा का क्या अर्थ है?')">
+
+                        सः और सा का क्या अर्थ है?
+
+                    </button>
+
+
+                    <button
+                        onclick="useSuggestion('पठति और पठामि में क्या difference है?')">
+
+                        पठति और पठामि में क्या difference है?
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- INPUT -->
+
+            <div class="chat-input-area">
+
+                <input
+                    type="text"
+                    id="ai-input"
+                    placeholder="Type your Sanskrit doubt..."
+                    autocomplete="off"
+                    onkeydown="handleAIKey(event)"
+                >
+
+
+                <button
+                    onclick="askAITutor()"
+                    id="ai-send-button">
+
+                    Send ➤
+
+                </button>
+
+            </div>
+
+
+            <p class="ai-demo-note">
+                💡 AI Tutor Demo Mode
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 Sanskrit Learner
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
