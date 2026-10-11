@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta name="google-site-verification" content="HBCwBlMqVWyqgxe50XCT33z4X_GHVqxmG3XHmaWgA78" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>संस्कृत Learner | Free Sanskrit Learning Platform</title>
@@ -43,6 +42,17 @@
         <span class="stat-icon">🎖️</span>
         <span class="stat-label">Lvl</span>
         <span class="stat-value" id="level-val">1</span>
+      </div>
+
+      <!-- Audio Controls (Relaxing Background Music & Sound Effects) -->
+      <div class="audio-control-pill" id="audio-control-pill">
+        <button class="sound-toggle-btn" id="sound-toggle-btn" aria-label="Toggle Sound" title="Enable Sound & Background Music">
+          <span class="sound-icon" id="sound-icon">🔇</span>
+          <span class="sound-label" id="sound-label">Music</span>
+        </button>
+        <div class="volume-slider-wrap" id="volume-slider-wrap">
+          <input type="range" id="volume-slider" min="0" max="100" value="12" class="volume-slider" title="Music & Sound Volume" aria-label="Audio Volume">
+        </div>
       </div>
 
       <button class="nav-btn tutor-btn" id="open-tutor-btn" title="Ask AI Sanskrit Tutor">

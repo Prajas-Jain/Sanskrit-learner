@@ -1292,17 +1292,314 @@ const elOpenBadgesBtn = document.getElementById("open-badges-btn");
 const elCloseBadgesBtn = document.getElementById("close-badges-btn");
 const elBadgesGrid = document.getElementById("badges-grid");
 
+// ==========================================================================
+// 4. AUDIO SYSTEM & SOUND CONTROLLER
+// Background Music (Piano + Guitar), Quiz SFX (Tadaaa / Daww / Fanfare)
+// ==========================================================================
+
+const AUDIO_STORAGE_KEY = "sanskrit_learner_audio_settings_v1";
+
+const SoundController = {
+  bgAudio: null,
+  currentSfx: null,
+  duckTimeout: null,
+  fadeInterval: null,
+  hasInteracted: false,
+  wasPlayingBeforeHidden: false,
+  settings: {
+    soundEnabled: false, // Default disabled until user turns it on
+    volume: 0.12         // Default 12% volume (gentle, peaceful background)
+  },
+
+  init() {
+    // 1. Load preferences from localStorage
+    try {
+      const saved = localStorage.getItem(AUDIO_STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.soundEnabled === "boolean") {
+          this.settings.soundEnabled = parsed.soundEnabled;
+        }
+        if (typeof parsed.volume === "number" && !isNaN(parsed.volume)) {
+          this.settings.volume = Math.max(0, Math.min(1, parsed.volume));
+        }
+      }
+    } catch (e) {
+      console.warn("Could not read audio preferences:", e);
+    }
+
+    // 2. Instantiate background audio element
+    try {
+      this.bgAudio = new Audio("assets/audio/background.mp3");
+      this.bgAudio.loop = true;
+      this.bgAudio.preload = "auto";
+      this.bgAudio.volume = this.settings.volume;
+    } catch (e) {
+      console.warn("Audio element initialization notice:", e);
+    }
+
+    // 3. Update UI to reflect loaded state
+    this.updateUI();
+
+    // 4. Handle visibility change (pause when tab hidden, resume when visible)
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        if (this.bgAudio && !this.bgAudio.paused) {
+          this.bgAudio.pause();
+          this.wasPlayingBeforeHidden = true;
+        }
+      } else {
+        if (this.wasPlayingBeforeHidden && this.settings.soundEnabled) {
+          this.playBackgroundMusic();
+          this.wasPlayingBeforeHidden = false;
+        }
+      }
+    });
+
+    // 5. On first user interaction, if sound was previously enabled by the user in localStorage,
+    // start background playback (satisfies browser user-gesture autoplay policies)
+    const handleFirstGesture = () => {
+      if (this.hasInteracted) return;
+      this.hasInteracted = true;
+      if (this.settings.soundEnabled && this.settings.volume > 0) {
+        this.playBackgroundMusic();
+      }
+      window.removeEventListener("pointerdown", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
+    };
+    window.addEventListener("pointerdown", handleFirstGesture);
+    window.addEventListener("keydown", handleFirstGesture);
+  },
+
+  saveSettings() {
+    try {
+      localStorage.setItem(AUDIO_STORAGE_KEY, JSON.stringify(this.settings));
+    } catch (e) {}
+  },
+
+  toggleSound() {
+    this.hasInteracted = true;
+    this.settings.soundEnabled = !this.settings.soundEnabled;
+    this.saveSettings();
+
+    if (this.settings.soundEnabled) {
+      if (this.settings.volume <= 0.01) {
+        this.settings.volume = 0.12;
+      }
+      this.playBackgroundMusic();
+      showToast("🎵 Sound Enabled", "Background music & quiz sounds active (" + Math.round(this.settings.volume * 100) + "% vol)");
+    } else {
+      this.stopBackgroundMusic();
+      if (this.currentSfx) {
+        try {
+          this.currentSfx.pause();
+          this.currentSfx = null;
+        } catch (e) {}
+      }
+      showToast("🔇 Sound Muted", "Audio muted. Click the sound button anytime to enable.");
+    }
+
+    this.updateUI();
+  },
+
+  setVolume(normalizedVol) {
+    this.hasInteracted = true;
+    const vol = Math.max(0, Math.min(1, normalizedVol));
+    this.settings.volume = vol;
+
+    if (vol === 0) {
+      if (this.settings.soundEnabled) {
+        this.settings.soundEnabled = false;
+        this.stopBackgroundMusic();
+      }
+    } else {
+      if (!this.settings.soundEnabled) {
+        this.settings.soundEnabled = true;
+        this.playBackgroundMusic();
+      } else if (this.bgAudio) {
+        this.bgAudio.volume = vol;
+      }
+    }
+
+    this.saveSettings();
+    this.updateUI();
+  },
+
+  playBackgroundMusic() {
+    if (!this.settings.soundEnabled || !this.bgAudio || this.settings.volume <= 0) return;
+    try {
+      if (this.bgAudio.paused) {
+        this.bgAudio.volume = 0;
+        const promise = this.bgAudio.play();
+        if (promise !== undefined) {
+          promise.then(() => {
+            this.fadeIn(this.bgAudio, this.settings.volume, 450);
+          }).catch((err) => {
+            console.log("Audio playback waiting for interaction:", err);
+          });
+        }
+      } else {
+        this.fadeIn(this.bgAudio, this.settings.volume, 300);
+      }
+    } catch (e) {
+      console.warn("playBackgroundMusic caught:", e);
+    }
+  },
+
+  stopBackgroundMusic() {
+    if (!this.bgAudio || this.bgAudio.paused) return;
+    this.fadeOut(this.bgAudio, 300, () => {
+      try {
+        this.bgAudio.pause();
+      } catch (e) {}
+    });
+  },
+
+  fadeIn(audio, targetVol, durationMs) {
+    if (!audio) return;
+    clearInterval(this.fadeInterval);
+    const startVol = audio.volume;
+    const steps = 15;
+    const stepTime = durationMs / steps;
+    let step = 0;
+    this.fadeInterval = setInterval(() => {
+      step++;
+      const current = startVol + (targetVol - startVol) * (step / steps);
+      audio.volume = Math.max(0, Math.min(1, current));
+      if (step >= steps) {
+        clearInterval(this.fadeInterval);
+        audio.volume = targetVol;
+      }
+    }, stepTime);
+  },
+
+  fadeOut(audio, durationMs, onComplete) {
+    if (!audio) return;
+    clearInterval(this.fadeInterval);
+    const startVol = audio.volume;
+    const steps = 15;
+    const stepTime = durationMs / steps;
+    let step = 0;
+    this.fadeInterval = setInterval(() => {
+      step++;
+      const current = startVol * (1 - step / steps);
+      audio.volume = Math.max(0, Math.min(1, current));
+      if (step >= steps) {
+        clearInterval(this.fadeInterval);
+        audio.volume = 0;
+        if (onComplete) onComplete();
+      }
+    }, stepTime);
+  },
+
+  playSfx(type) {
+    if (!this.settings.soundEnabled || this.settings.volume <= 0) return;
+
+    if (this.currentSfx) {
+      try {
+        this.currentSfx.pause();
+        this.currentSfx.currentTime = 0;
+      } catch (e) {}
+      this.currentSfx = null;
+    }
+
+    const sfxMap = {
+      correct: "assets/audio/correct.mp3",
+      incorrect: "assets/audio/incorrect.mp3",
+      complete: "assets/audio/complete.mp3"
+    };
+
+    const filePath = sfxMap[type];
+    if (!filePath) return;
+
+    try {
+      const sfx = new Audio(filePath);
+      const sfxVolume = Math.min(1.0, Math.max(0.40, this.settings.volume * 2.8));
+      sfx.volume = sfxVolume;
+      this.currentSfx = sfx;
+
+      const duckTime = (type === "complete") ? 2400 : 1000;
+      this.duckBackgroundMusic(duckTime);
+
+      sfx.play().catch((err) => {
+        console.warn("Sound effect playback prevented:", err);
+      });
+
+      sfx.addEventListener("ended", () => {
+        if (this.currentSfx === sfx) {
+          this.currentSfx = null;
+        }
+      });
+    } catch (err) {
+      console.warn("Could not play sound effect:", err);
+    }
+  },
+
+  duckBackgroundMusic(durationMs) {
+    if (!this.bgAudio || this.bgAudio.paused || !this.settings.soundEnabled) return;
+    clearTimeout(this.duckTimeout);
+
+    const duckedVol = this.settings.volume * 0.25;
+    this.bgAudio.volume = Math.max(0, duckedVol);
+
+    this.duckTimeout = setTimeout(() => {
+      if (this.bgAudio && !this.bgAudio.paused && this.settings.soundEnabled) {
+        this.fadeIn(this.bgAudio, this.settings.volume, 400);
+      }
+    }, durationMs);
+  },
+
+  updateUI() {
+    const toggleBtn = document.getElementById("sound-toggle-btn");
+    const iconEl = document.getElementById("sound-icon");
+    const labelEl = document.getElementById("sound-label");
+    const slider = document.getElementById("volume-slider");
+    const pill = document.getElementById("audio-control-pill");
+
+    if (!toggleBtn) return;
+
+    const isActive = this.settings.soundEnabled && this.settings.volume > 0;
+    if (isActive) {
+      if (iconEl) iconEl.textContent = "🎵";
+      if (labelEl) labelEl.textContent = "Music On";
+      toggleBtn.classList.add("sound-active");
+      toggleBtn.setAttribute("title", "Click to Mute Sound");
+      if (pill) pill.classList.add("sound-active");
+    } else {
+      if (iconEl) iconEl.textContent = "🔇";
+      if (labelEl) labelEl.textContent = "Muted";
+      toggleBtn.classList.remove("sound-active");
+      toggleBtn.setAttribute("title", "Click to Enable Relaxing Background Music & Sound Effects");
+      if (pill) pill.classList.remove("sound-active");
+    }
+
+    if (slider) {
+      const pct = Math.round(this.settings.volume * 100);
+      slider.value = pct;
+      slider.style.background = "linear-gradient(to right, #7c3aed 0%, #7c3aed " + pct + "%, #e2e8f0 " + pct + "%, #e2e8f0 100%)";
+    }
+  }
+};
+
 // Toast Notification DOM
 const elToastNotify = document.getElementById("toast-notify");
 const elToastIcon = document.getElementById("toast-icon");
 const elToastTitle = document.getElementById("toast-title");
 const elToastDesc = document.getElementById("toast-desc");
 
+// Audio Controls DOM
+const elAudioControlPill = document.getElementById("audio-control-pill");
+const elSoundToggleBtn = document.getElementById("sound-toggle-btn");
+const elSoundIcon = document.getElementById("sound-icon");
+const elSoundLabel = document.getElementById("sound-label");
+const elVolumeSlider = document.getElementById("volume-slider");
+
 // ==========================================================================
 // 6. INITIALIZATION & TRAIL RENDERING (All 30 Lessons across 10 Units)
 // ==========================================================================
 function initApp() {
   updateStats();
+  SoundController.init();
   updateProgress();
   renderTrailNodes();
   
@@ -1649,6 +1946,9 @@ function checkAnswer(selectedIndex, clickedBtn) {
     appState.xp += 10; // +10 XP for correct answer
     updateStats();
 
+    // Trigger Exciting Tadaaa! Sound Effect
+    SoundController.playSfx("correct");
+
     elTestFeedback.className = "feedback-banner correct-banner";
     elFeedbackIcon.textContent = "🎉";
     elFeedbackTitle.textContent = "उत्तमम्! Correct Answer! (+10 XP)";
@@ -1659,6 +1959,9 @@ function checkAnswer(selectedIndex, clickedBtn) {
     if (buttons[q.correctIndex]) {
       buttons[q.correctIndex].classList.add("correct");
     }
+
+    // Trigger Gentle Daww... Sound Effect
+    SoundController.playSfx("incorrect");
 
     elTestFeedback.className = "feedback-banner wrong-banner";
     elFeedbackIcon.textContent = "💡";
@@ -1700,6 +2003,9 @@ function completeLesson() {
   elLearnModeView.style.display = "none";
   elTestModeView.style.display = "none";
   elCompleteModeView.style.display = "flex";
+
+  // Trigger Lesson Completion Celebratory Flourish
+  SoundController.playSfx("complete");
 
   const totalQ = currentActiveLesson.quiz.length;
   const accuracy = Math.round((currentQuizScore / totalQ) * 100);
@@ -1961,6 +2267,17 @@ function showToast(title, desc) {
 // ==========================================================================
 
 function setupEventListeners() {
+  // Audio Controls
+  if (elSoundToggleBtn) {
+    elSoundToggleBtn.addEventListener("click", () => SoundController.toggleSound());
+  }
+  if (elVolumeSlider) {
+    elVolumeSlider.addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value) / 100;
+      SoundController.setVolume(val);
+    });
+  }
+
   // Lesson Modal buttons
   elCloseLessonBtn.addEventListener("click", closeLesson);
   elNextLearnBtn.addEventListener("click", nextLearn);
