@@ -1330,7 +1330,7 @@ const SoundController = {
 
     // 2. Instantiate background audio element
     try {
-      this.bgAudio = new Audio("assets/audio/background.mp3");
+      this.bgAudio = new Audio("background.mp3");
       this.bgAudio.loop = true;
       this.bgAudio.preload = "auto";
       this.bgAudio.volume = this.settings.volume;
@@ -1504,9 +1504,9 @@ const SoundController = {
     }
 
     const sfxMap = {
-      correct: "assets/audio/correct.mp3",
-      incorrect: "assets/audio/incorrect.mp3",
-      complete: "assets/audio/complete.mp3"
+      correct: "correct.mp3",
+      incorrect: "incorrect.mp3",
+      complete: "lesson-complete.mp3"
     };
 
     const filePath = sfxMap[type];
@@ -2340,3 +2340,5 @@ function debounce(fn, wait) {
 
 // Start app when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initApp);
+script.js
+Displaying script.js.
