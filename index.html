@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>संस्कृतम् by Prajas Jain | Learn Sanskrit Online for Free</title>
+  <title>संस्कृत Learner | Free Sanskrit Learning Platform</title>
   <!-- Google Fonts: Poppins for modern UI, Noto Sans Devanagari for clean Sanskrit -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,15 +44,12 @@
         <span class="stat-value" id="level-val">1</span>
       </div>
 
-      <!-- Audio Controls (Relaxing Background Music & Sound Effects) -->
-      <div class="audio-control-pill" id="audio-control-pill">
-        <button class="sound-toggle-btn" id="sound-toggle-btn" aria-label="Toggle Sound" title="Enable Sound & Background Music">
-          <span class="sound-icon" id="sound-icon">🔇</span>
-          <span class="sound-label" id="sound-label">Music</span>
+      <!-- Simple Audio Toggle (ON by default) -->
+      <div class="audio-control-pill sound-active" id="audio-control-pill">
+        <button class="sound-toggle-btn sound-active" id="sound-toggle-btn" aria-label="Toggle Audio" title="Sound is ON (Click to Mute)">
+          <span class="sound-icon" id="sound-icon">🎵</span>
+          <span class="sound-label" id="sound-label">Sound On</span>
         </button>
-        <div class="volume-slider-wrap" id="volume-slider-wrap">
-          <input type="range" id="volume-slider" min="0" max="100" value="12" class="volume-slider" title="Music & Sound Volume" aria-label="Audio Volume">
-        </div>
       </div>
 
       <button class="nav-btn tutor-btn" id="open-tutor-btn" title="Ask AI Sanskrit Tutor">
