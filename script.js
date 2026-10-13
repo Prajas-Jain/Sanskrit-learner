@@ -1181,30 +1181,46 @@ function getDefaultState() {
 }
 
 function loadState() {
+  const defaults = getDefaultState();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return getDefaultState();
+    if (!raw) return defaults;
     const data = JSON.parse(raw);
-    
+    if (!data || typeof data !== "object") return defaults;
+
+    const state = {
+      xp: (typeof data.xp === "number" && !isNaN(data.xp)) ? data.xp : defaults.xp,
+      level: (typeof data.level === "number" && !isNaN(data.level)) ? data.level : defaults.level,
+      streak: (typeof data.streak === "number" && !isNaN(data.streak)) ? data.streak : defaults.streak,
+      lastActiveDate: (typeof data.lastActiveDate === "string") ? data.lastActiveDate : defaults.lastActiveDate,
+      completedLessons: Array.isArray(data.completedLessons) ? data.completedLessons : defaults.completedLessons,
+      currentLessonId: (typeof data.currentLessonId === "number" && !isNaN(data.currentLessonId)) ? data.currentLessonId : defaults.currentLessonId,
+      earnedBadges: Array.isArray(data.earnedBadges) ? data.earnedBadges : defaults.earnedBadges,
+      hasPerfectScore: Boolean(data.hasPerfectScore)
+    };
+
     // Check and update streak based on calendar date
     const today = new Date().toISOString().split("T")[0];
-    if (data.lastActiveDate !== today) {
-      const last = new Date(data.lastActiveDate);
-      const cur = new Date(today);
-      const diffDays = Math.round((cur - last) / (1000 * 60 * 60 * 24));
-      
-      if (diffDays === 1) {
-        data.streak = (data.streak || 1) + 1;
-      } else if (diffDays > 1) {
-        data.streak = 1;
-      }
-      data.lastActiveDate = today;
-      saveState(data);
+    if (state.lastActiveDate !== today) {
+      try {
+        const last = new Date(state.lastActiveDate);
+        const cur = new Date(today);
+        if (!isNaN(last.getTime())) {
+          const diffDays = Math.round((cur - last) / (1000 * 60 * 60 * 24));
+          if (diffDays === 1) {
+            state.streak = (state.streak || 1) + 1;
+          } else if (diffDays > 1) {
+            state.streak = 1;
+          }
+        }
+      } catch (e) {}
+      state.lastActiveDate = today;
+      saveState(state);
     }
-    return data;
+    return state;
   } catch (err) {
     console.error("Error reading localStorage:", err);
-    return getDefaultState();
+    return defaults;
   }
 }
 
@@ -1228,69 +1244,172 @@ let currentQuizScore = 0;
 let isAnswered = false;
 
 // ==========================================================================
-// 5. DOM ELEMENTS CACHE
+// 5. DOM ELEMENTS CACHE & INITIALIZATION
 // ==========================================================================
-const elStreakVal = document.getElementById("streak-val");
-const elXpVal = document.getElementById("xp-val");
-const elLevelVal = document.getElementById("level-val");
-const elOverallProgressBar = document.getElementById("overall-progress-bar");
-const elProgressSummary = document.getElementById("progress-summary");
-const elLevelTitleTxt = document.getElementById("level-title-txt");
-const elXpNeededTxt = document.getElementById("xp-needed-txt");
+let elStreakVal = null;
+let elXpVal = null;
+let elLevelVal = null;
+let elOverallProgressBar = null;
+let elProgressSummary = null;
+let elLevelTitleTxt = null;
+let elXpNeededTxt = null;
 
-const elTrailContainer = document.getElementById("trail-container");
-const elTrailPathBg = document.getElementById("trail-path-bg");
-const elTrailPathFill = document.getElementById("trail-path-fill");
+let elTrailContainer = null;
+let elTrailPathBg = null;
+let elTrailPathFill = null;
 
-const elLessonModal = document.getElementById("lesson-modal");
-const elCloseLessonBtn = document.getElementById("close-lesson-btn");
-const elLessonModalCat = document.getElementById("lesson-modal-cat");
-const elLessonModalTitle = document.getElementById("lesson-modal-title");
-const elLessonStepIndicator = document.getElementById("lesson-step-indicator");
-const elModalStepProgress = document.getElementById("modal-step-progress");
+let elLessonModal = null;
+let elCloseLessonBtn = null;
+let elLessonModalCat = null;
+let elLessonModalTitle = null;
+let elLessonStepIndicator = null;
+let elModalStepProgress = null;
 
-// Learn Mode DOM
-const elLearnModeView = document.getElementById("learn-mode-view");
-const elLearnSanskrit = document.getElementById("learn-sanskrit");
-const elLearnHindi = document.getElementById("learn-hindi");
-const elLearnEnglish = document.getElementById("learn-english");
-const elLearnExplanation = document.getElementById("learn-explanation");
-const elNextLearnBtn = document.getElementById("next-learn-btn");
+let elLearnModeView = null;
+let elLearnSanskrit = null;
+let elLearnHindi = null;
+let elLearnEnglish = null;
+let elLearnExplanation = null;
+let elNextLearnBtn = null;
 
-// Test Mode DOM
-const elTestModeView = document.getElementById("test-mode-view");
-const elTestQuestionCounter = document.getElementById("test-question-counter");
-const elTestQuestionText = document.getElementById("test-question-text");
-const elTestOptionsContainer = document.getElementById("test-options-container");
-const elTestFeedback = document.getElementById("test-feedback");
-const elFeedbackIcon = document.getElementById("feedback-icon");
-const elFeedbackTitle = document.getElementById("feedback-title");
-const elFeedbackDesc = document.getElementById("feedback-desc");
-const elNextQuestionBtn = document.getElementById("next-question-btn");
+let elTestModeView = null;
+let elTestQuestionCounter = null;
+let elTestQuestionText = null;
+let elTestOptionsContainer = null;
+let elTestFeedback = null;
+let elFeedbackIcon = null;
+let elFeedbackTitle = null;
+let elFeedbackDesc = null;
+let elNextQuestionBtn = null;
 
-// Complete View DOM
-const elCompleteModeView = document.getElementById("complete-mode-view");
-const elCompleteScoreVal = document.getElementById("complete-score-val");
-const elCompleteXpVal = document.getElementById("complete-xp-val");
-const elCompleteAccuracyVal = document.getElementById("complete-accuracy-val");
-const elUnlockAlertText = document.getElementById("unlock-alert-text");
-const elFinishLessonBtn = document.getElementById("finish-lesson-btn");
+let elCompleteModeView = null;
+let elCompleteScoreVal = null;
+let elCompleteXpVal = null;
+let elCompleteAccuracyVal = null;
+let elUnlockAlertText = null;
+let elFinishLessonBtn = null;
 
-// AI Tutor DOM
-const elTutorModal = document.getElementById("tutor-modal");
-const elOpenTutorBtn = document.getElementById("open-tutor-btn");
-const elOpenTutorBannerBtn = document.getElementById("open-tutor-banner-btn");
-const elCloseTutorBtn = document.getElementById("close-tutor-btn");
-const elTutorChatBody = document.getElementById("tutor-chat-body");
-const elTutorInput = document.getElementById("tutor-input");
-const elTutorSendBtn = document.getElementById("tutor-send-btn");
-const elSuggestionsContainer = document.getElementById("suggestions-container");
+let elTutorModal = null;
+let elOpenTutorBtn = null;
+let elOpenTutorBannerBtn = null;
+let elCloseTutorBtn = null;
+let elTutorChatBody = null;
+let elTutorInput = null;
+let elTutorSendBtn = null;
+let elSuggestionsContainer = null;
 
-// Badges Modal DOM
-const elBadgesModal = document.getElementById("badges-modal");
-const elOpenBadgesBtn = document.getElementById("open-badges-btn");
-const elCloseBadgesBtn = document.getElementById("close-badges-btn");
-const elBadgesGrid = document.getElementById("badges-grid");
+let elBadgesModal = null;
+let elOpenBadgesBtn = null;
+let elCloseBadgesBtn = null;
+let elBadgesGrid = null;
+
+let elToastNotify = null;
+let elToastIcon = null;
+let elToastTitle = null;
+let elToastDesc = null;
+
+let elAudioControlPill = null;
+let elSoundToggleBtn = null;
+let elSoundIcon = null;
+let elSoundLabel = null;
+let elVolumeSlider = null;
+
+function ensureAudioControlsInDOM() {
+  if (document.getElementById("audio-control-pill")) return;
+  const headerStats = document.querySelector(".header-stats");
+  if (!headerStats) return;
+
+  const pill = document.createElement("div");
+  pill.className = "audio-control-pill";
+  pill.id = "audio-control-pill";
+  pill.innerHTML = `
+    <button class="sound-toggle-btn" id="sound-toggle-btn" aria-label="Toggle Sound" title="Enable Sound & Background Music">
+      <span class="sound-icon" id="sound-icon">🔇</span>
+      <span class="sound-label" id="sound-label">Music</span>
+    </button>
+    <div class="volume-slider-wrap" id="volume-slider-wrap">
+      <input type="range" id="volume-slider" min="0" max="100" value="12" class="volume-slider" title="Music & Sound Volume" aria-label="Audio Volume">
+    </div>
+  `;
+  const tutorBtn = document.getElementById("open-tutor-btn");
+  if (tutorBtn && tutorBtn.parentNode === headerStats) {
+    headerStats.insertBefore(pill, tutorBtn);
+  } else {
+    headerStats.appendChild(pill);
+  }
+}
+
+function initDOMElements() {
+  elStreakVal = document.getElementById("streak-val");
+  elXpVal = document.getElementById("xp-val");
+  elLevelVal = document.getElementById("level-val");
+  elOverallProgressBar = document.getElementById("overall-progress-bar");
+  elProgressSummary = document.getElementById("progress-summary");
+  elLevelTitleTxt = document.getElementById("level-title-txt");
+  elXpNeededTxt = document.getElementById("xp-needed-txt");
+
+  elTrailContainer = document.getElementById("trail-container");
+  elTrailPathBg = document.getElementById("trail-path-bg");
+  elTrailPathFill = document.getElementById("trail-path-fill");
+
+  elLessonModal = document.getElementById("lesson-modal");
+  elCloseLessonBtn = document.getElementById("close-lesson-btn");
+  elLessonModalCat = document.getElementById("lesson-modal-cat");
+  elLessonModalTitle = document.getElementById("lesson-modal-title");
+  elLessonStepIndicator = document.getElementById("lesson-step-indicator");
+  elModalStepProgress = document.getElementById("modal-step-progress");
+
+  elLearnModeView = document.getElementById("learn-mode-view");
+  elLearnSanskrit = document.getElementById("learn-sanskrit");
+  elLearnHindi = document.getElementById("learn-hindi");
+  elLearnEnglish = document.getElementById("learn-english");
+  elLearnExplanation = document.getElementById("learn-explanation");
+  elNextLearnBtn = document.getElementById("next-learn-btn");
+
+  elTestModeView = document.getElementById("test-mode-view");
+  elTestQuestionCounter = document.getElementById("test-question-counter");
+  elTestQuestionText = document.getElementById("test-question-text");
+  elTestOptionsContainer = document.getElementById("test-options-container");
+  elTestFeedback = document.getElementById("test-feedback");
+  elFeedbackIcon = document.getElementById("feedback-icon");
+  elFeedbackTitle = document.getElementById("feedback-title");
+  elFeedbackDesc = document.getElementById("feedback-desc");
+  elNextQuestionBtn = document.getElementById("next-question-btn");
+
+  elCompleteModeView = document.getElementById("complete-mode-view");
+  elCompleteScoreVal = document.getElementById("complete-score-val");
+  elCompleteXpVal = document.getElementById("complete-xp-val");
+  elCompleteAccuracyVal = document.getElementById("complete-accuracy-val");
+  elUnlockAlertText = document.getElementById("unlock-alert-text");
+  elFinishLessonBtn = document.getElementById("finish-lesson-btn");
+
+  elTutorModal = document.getElementById("tutor-modal");
+  elOpenTutorBtn = document.getElementById("open-tutor-btn");
+  elOpenTutorBannerBtn = document.getElementById("open-tutor-banner-btn");
+  elCloseTutorBtn = document.getElementById("close-tutor-btn");
+  elTutorChatBody = document.getElementById("tutor-chat-body");
+  elTutorInput = document.getElementById("tutor-input");
+  elTutorSendBtn = document.getElementById("tutor-send-btn");
+  elSuggestionsContainer = document.getElementById("suggestions-container");
+
+  elBadgesModal = document.getElementById("badges-modal");
+  elOpenBadgesBtn = document.getElementById("open-badges-btn");
+  elCloseBadgesBtn = document.getElementById("close-badges-btn");
+  elBadgesGrid = document.getElementById("badges-grid");
+
+  elToastNotify = document.getElementById("toast-notify");
+  elToastIcon = document.getElementById("toast-icon");
+  elToastTitle = document.getElementById("toast-title");
+  elToastDesc = document.getElementById("toast-desc");
+
+  ensureAudioControlsInDOM();
+
+  elAudioControlPill = document.getElementById("audio-control-pill");
+  elSoundToggleBtn = document.getElementById("sound-toggle-btn");
+  elSoundIcon = document.getElementById("sound-icon");
+  elSoundLabel = document.getElementById("sound-label");
+  elVolumeSlider = document.getElementById("volume-slider");
+}
 
 // ==========================================================================
 // 4. AUDIO SYSTEM & SOUND CONTROLLER
@@ -1581,50 +1700,64 @@ const SoundController = {
   }
 };
 
-// Toast Notification DOM
-const elToastNotify = document.getElementById("toast-notify");
-const elToastIcon = document.getElementById("toast-icon");
-const elToastTitle = document.getElementById("toast-title");
-const elToastDesc = document.getElementById("toast-desc");
-
-// Audio Controls DOM
-const elAudioControlPill = document.getElementById("audio-control-pill");
-const elSoundToggleBtn = document.getElementById("sound-toggle-btn");
-const elSoundIcon = document.getElementById("sound-icon");
-const elSoundLabel = document.getElementById("sound-label");
-const elVolumeSlider = document.getElementById("volume-slider");
-
 // ==========================================================================
 // 6. INITIALIZATION & TRAIL RENDERING (All 30 Lessons across 10 Units)
 // ==========================================================================
 function initApp() {
-  updateStats();
-  SoundController.init();
-  updateProgress();
-  renderTrailNodes();
-  
-  // Multiple draw triggers to ensure smooth SVG bezier calculations across font load & layout
-  setTimeout(drawTrailCurvedPath, 80);
-  setTimeout(drawTrailCurvedPath, 350);
-  window.addEventListener("load", drawTrailCurvedPath);
+  try {
+    initDOMElements();
+  } catch (err) {
+    console.error("DOM initialization error:", err);
+  }
 
-  // Setup Event Listeners
-  setupEventListeners();
+  try {
+    updateStats();
+  } catch (err) {
+    console.error("Stats update error:", err);
+  }
 
-  // Listen to window resize to redraw curved SVG path
-  window.addEventListener("resize", debounce(drawTrailCurvedPath, 150));
+  try {
+    SoundController.init();
+  } catch (err) {
+    console.error("Sound initialization error:", err);
+  }
+
+  try {
+    updateProgress();
+  } catch (err) {
+    console.error("Progress update error:", err);
+  }
+
+  try {
+    renderTrailNodes();
+  } catch (err) {
+    console.error("Trail rendering error:", err);
+  }
+
+  try {
+    setupEventListeners();
+  } catch (err) {
+    console.error("Event listeners setup error:", err);
+  }
+
+  try {
+    setTimeout(drawTrailCurvedPath, 80);
+    setTimeout(drawTrailCurvedPath, 350);
+    window.addEventListener("load", drawTrailCurvedPath);
+    window.addEventListener("resize", debounce(drawTrailCurvedPath, 150));
+  } catch (err) {
+    console.error("Trail path setup error:", err);
+  }
 }
 
 function updateStats() {
-  // Level formula: Level 1 at 0-49 XP, Level 2 at 50-99 XP, Level 3 at 100-149 XP...
-  const computedLevel = Math.floor(appState.xp / 50) + 1;
+  const computedLevel = Math.floor((appState.xp || 0) / 50) + 1;
   appState.level = computedLevel;
 
-  elStreakVal.textContent = appState.streak;
-  elXpVal.textContent = appState.xp;
-  elLevelVal.textContent = appState.level;
+  if (elStreakVal) elStreakVal.textContent = appState.streak || 1;
+  if (elXpVal) elXpVal.textContent = appState.xp || 0;
+  if (elLevelVal) elLevelVal.textContent = appState.level || 1;
 
-  // Title rank based on level
   const rankTitles = [
     "जिज्ञासुः (Curious Beginner)",
     "आरम्भकः (Rising Student)",
@@ -1633,23 +1766,27 @@ function updateStats() {
     "विद्वान् (Advanced Scholar)",
     "पण्डितः (Sanskrit Master)"
   ];
-  const rankIdx = Math.min(appState.level - 1, rankTitles.length - 1);
-  elLevelTitleTxt.textContent = `Level ${appState.level}: ${rankTitles[rankIdx]}`;
+  const rankIdx = Math.min(Math.max(0, appState.level - 1), rankTitles.length - 1);
+  if (elLevelTitleTxt) elLevelTitleTxt.textContent = `Level ${appState.level}: ${rankTitles[rankIdx]}`;
 
   const nextLevelCeil = appState.level * 50;
-  const xpNeeded = nextLevelCeil - appState.xp;
-  elXpNeededTxt.textContent = `${xpNeeded} XP to Level ${appState.level + 1}`;
+  const xpNeeded = Math.max(0, nextLevelCeil - (appState.xp || 0));
+  if (elXpNeededTxt) elXpNeededTxt.textContent = `${xpNeeded} XP to Level ${appState.level + 1}`;
 
   checkAndAwardBadges();
   saveState(appState);
 }
 
 function updateProgress() {
-  // Progress tracks the genuinely completed functional lessons (out of 9)
-  const completedCount = appState.completedLessons.length;
-  elProgressSummary.textContent = `${completedCount} / 9 Lessons Completed`;
+  const completedList = Array.isArray(appState.completedLessons) ? appState.completedLessons : [];
+  const completedCount = completedList.length;
+  if (elProgressSummary) {
+    elProgressSummary.textContent = `${completedCount} / 9 Lessons Completed`;
+  }
   const pct = Math.round((completedCount / 9) * 100);
-  elOverallProgressBar.style.width = `${pct}%`;
+  if (elOverallProgressBar) {
+    elOverallProgressBar.style.width = `${pct}%`;
+  }
 }
 
 // Render all 30 lesson nodes across 10 unit containers
@@ -1744,14 +1881,17 @@ function renderTrailNodes() {
 }
 
 function drawTrailCurvedPath() {
-  const container = elTrailContainer;
+  const container = elTrailContainer || document.getElementById("trail-container");
+  if (!container) return;
   const buttons = container.querySelectorAll(".node-circle-btn");
   if (!buttons || buttons.length < 2) return;
 
+  if (typeof container.getBoundingClientRect !== "function") return;
   const containerRect = container.getBoundingClientRect();
   const points = [];
 
   buttons.forEach((btn) => {
+    if (!btn || typeof btn.getBoundingClientRect !== "function") return;
     const rect = btn.getBoundingClientRect();
     const x = rect.left + rect.width / 2 - containerRect.left;
     const y = rect.top + rect.height / 2 - containerRect.top;
@@ -1760,32 +1900,31 @@ function drawTrailCurvedPath() {
 
   if (points.length < 2) return;
 
-  // Build a smooth cubic bezier path connecting every point
   let d = `M ${points[0].x} ${points[0].y}`;
-
   for (let i = 0; i < points.length - 1; i++) {
     const p0 = points[i];
     const p1 = points[i + 1];
-
     const dy = p1.y - p0.y;
     const cp1x = p0.x;
     const cp1y = p0.y + dy * 0.55;
     const cp2x = p1.x;
     const cp2y = p1.y - dy * 0.55;
-
     d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p1.x} ${p1.y}`;
   }
 
-  elTrailPathBg.setAttribute("d", d);
-  elTrailPathFill.setAttribute("d", d);
+  const bgPath = elTrailPathBg || document.getElementById("trail-path-bg");
+  const fillPath = elTrailPathFill || document.getElementById("trail-path-fill");
 
-  // Set the fill progress on the trail based on completed functional lessons
-  const totalLength = elTrailPathBg.getTotalLength ? elTrailPathBg.getTotalLength() : 2500;
-  const completedCount = appState.completedLessons.length;
-  const ratio = Math.min(completedCount / 30, 1);
-  
-  elTrailPathFill.style.strokeDasharray = `${totalLength}`;
-  elTrailPathFill.style.strokeDashoffset = `${totalLength * (1 - ratio)}`;
+  if (bgPath) bgPath.setAttribute("d", d);
+  if (fillPath) {
+    fillPath.setAttribute("d", d);
+    const totalLength = fillPath.getTotalLength ? fillPath.getTotalLength() : 2500;
+    const completedList = Array.isArray(appState.completedLessons) ? appState.completedLessons : [];
+    const completedCount = completedList.length;
+    const ratio = Math.min(completedCount / 30, 1);
+    fillPath.style.strokeDasharray = `${totalLength}`;
+    fillPath.style.strokeDashoffset = `${totalLength * (1 - ratio)}`;
+  }
 }
 
 // ==========================================================================
@@ -1982,7 +2121,7 @@ function checkAnswer(selectedIndex, clickedBtn) {
 
   // Seamlessly keep Next button visible without requiring manual scroll
   setTimeout(() => {
-    if (elNextQuestionBtn && elNextQuestionBtn.style.display !== "none") {
+    if (elNextQuestionBtn && elNextQuestionBtn.style.display !== "none" && typeof elNextQuestionBtn.scrollIntoView === "function") {
       elNextQuestionBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }, 20);
@@ -2138,7 +2277,7 @@ const TUTOR_KNOWLEDGE_BASE = [
 function openAITutor() {
   elTutorModal.classList.add("active");
   elTutorModal.setAttribute("aria-hidden", "false");
-  elTutorInput.focus();
+  if (elTutorInput && typeof elTutorInput.focus === "function") elTutorInput.focus();
 }
 
 function closeAITutor() {
@@ -2173,7 +2312,7 @@ function appendChatMessage(htmlText, sender) {
   `;
 
   elTutorChatBody.appendChild(msgDiv);
-  elTutorChatBody.scrollTop = elTutorChatBody.scrollHeight;
+  if (elTutorChatBody) elTutorChatBody.scrollTop = elTutorChatBody.scrollHeight;
 }
 
 function getAIResponse(query) {
@@ -2251,15 +2390,17 @@ function renderBadgesGrid() {
 
 let toastTimer = null;
 function showToast(title, desc) {
-  elToastTitle.textContent = title;
-  elToastDesc.textContent = desc;
+  if (elToastTitle) elToastTitle.textContent = title;
+  if (elToastDesc) elToastDesc.textContent = desc;
 
-  elToastNotify.classList.add("show");
-  if (toastTimer) clearTimeout(toastTimer);
+  if (elToastNotify) {
+    elToastNotify.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
 
-  toastTimer = setTimeout(() => {
-    elToastNotify.classList.remove("show");
-  }, 4000);
+    toastTimer = setTimeout(() => {
+      elToastNotify.classList.remove("show");
+    }, 4000);
+  }
 }
 
 // ==========================================================================
@@ -2279,44 +2420,50 @@ function setupEventListeners() {
   }
 
   // Lesson Modal buttons
-  elCloseLessonBtn.addEventListener("click", closeLesson);
-  elNextLearnBtn.addEventListener("click", nextLearn);
-  elNextQuestionBtn.addEventListener("click", nextQuestion);
-  elFinishLessonBtn.addEventListener("click", closeLesson);
+  if (elCloseLessonBtn) elCloseLessonBtn.addEventListener("click", closeLesson);
+  if (elNextLearnBtn) elNextLearnBtn.addEventListener("click", nextLearn);
+  if (elNextQuestionBtn) elNextQuestionBtn.addEventListener("click", nextQuestion);
+  if (elFinishLessonBtn) elFinishLessonBtn.addEventListener("click", closeLesson);
 
   // AI Tutor buttons
-  elOpenTutorBtn.addEventListener("click", openAITutor);
-  elOpenTutorBannerBtn.addEventListener("click", openAITutor);
-  elCloseTutorBtn.addEventListener("click", closeAITutor);
-  elTutorSendBtn.addEventListener("click", () => askAITutor());
+  if (elOpenTutorBtn) elOpenTutorBtn.addEventListener("click", openAITutor);
+  if (elOpenTutorBannerBtn) elOpenTutorBannerBtn.addEventListener("click", openAITutor);
+  if (elCloseTutorBtn) elCloseTutorBtn.addEventListener("click", closeAITutor);
+  if (elTutorSendBtn) elTutorSendBtn.addEventListener("click", () => askAITutor());
 
-  elTutorInput.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      askAITutor();
-    }
-  });
+  if (elTutorInput) {
+    elTutorInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        askAITutor();
+      }
+    });
+  }
 
   // Suggestion chips inside AI Tutor
-  elSuggestionsContainer.addEventListener("click", (e) => {
-    if (e.target.classList.contains("suggestion-chip")) {
-      const questionText = e.target.textContent;
-      askAITutor(questionText);
-    }
-  });
+  if (elSuggestionsContainer) {
+    elSuggestionsContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("suggestion-chip")) {
+        const questionText = e.target.textContent;
+        askAITutor(questionText);
+      }
+    });
+  }
 
   // Badges Modal
-  elOpenBadgesBtn.addEventListener("click", openBadgesModal);
-  elCloseBadgesBtn.addEventListener("click", closeBadgesModal);
+  if (elOpenBadgesBtn) elOpenBadgesBtn.addEventListener("click", openBadgesModal);
+  if (elCloseBadgesBtn) elCloseBadgesBtn.addEventListener("click", closeBadgesModal);
 
   // Close modals when clicking backdrop
   [elLessonModal, elTutorModal, elBadgesModal].forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.remove("active");
-        modal.setAttribute("aria-hidden", "true");
-        if (modal === elLessonModal) currentActiveLesson = null;
-      }
-    });
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.remove("active");
+          modal.setAttribute("aria-hidden", "true");
+          if (modal === elLessonModal) currentActiveLesson = null;
+        }
+      });
+    }
   });
 
   // Close modal on Escape key
@@ -2338,5 +2485,9 @@ function debounce(fn, wait) {
   };
 }
 
-// Start app when DOM is fully loaded
-document.addEventListener("DOMContentLoaded", initApp);
+// Start app when DOM is fully loaded or immediately if already loaded
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}

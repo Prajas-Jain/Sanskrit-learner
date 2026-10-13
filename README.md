@@ -10,10 +10,10 @@ All audio files are saved locally under `assets/audio/`:
 
 | Audio File | Type | Duration | Description & Mood |
 | :--- | :--- | :--- | :--- |
-| `assets/audio/background.mp3` | Soundtrack | ~28.2s (Seamless Loop) | Soothing, gentle acoustic guitar fingerpicking and soft felt piano with warm ambient reverb. Default low volume (12%). |
-| `assets/audio/correct.mp3` | SFX | ~1.05s | Uplifting, sparkling "Ta-daaa!" chime and major chord flourish. Triggered on correct quiz answers. |
-| `assets/audio/incorrect.mp3` | SFX | ~0.78s | Soft, gentle, cute "Daww..." descending tone. Warm and encouraging, not harsh or jarring. |
-| `assets/audio/complete.mp3` | SFX | ~2.40s | Celebratory victory fanfare with rich piano and sparkling chimes for completing a full lesson. |
+| `background.mp3` | Soundtrack | ~28.2s (Seamless Loop) | Soothing, gentle acoustic guitar fingerpicking and soft felt piano with warm ambient reverb. Default low volume (12%). |
+| `correct.mp3` | SFX | ~1.05s | Uplifting, sparkling "Ta-daaa!" chime and major chord flourish. Triggered on correct quiz answers. |
+| `incorrect.mp3` | SFX | ~0.78s | Soft, gentle, cute "Daww..." descending tone. Warm and encouraging, not harsh or jarring. |
+| `lesson-lesson-complete.mp3` | SFX | ~2.40s | Celebratory victory fanfare with rich piano and sparkling chimes for completing a full lesson. |
 
 ---
 
@@ -84,7 +84,7 @@ Sound effects are wired to specific user milestones:
            ├── background.mp3
            ├── correct.mp3
            ├── incorrect.mp3
-           └── complete.mp3
+           └── lesson-complete.mp3
    ```
 2. Open `index.html` in any modern web browser or deploy directly to GitHub Pages.
 3. Click the `🔇 Music` button in the top navigation bar to begin the relaxing study soundtrack.
