@@ -64,6 +64,81 @@
     </div>
   </header>
 
+  <!-- ======================================================== -->
+  <!-- FEATURE HUB NAVIGATION (Flashcards, Mistakes, Revision, Dictionary) -->
+  <!-- ======================================================== -->
+  <section class="feature-hub-wrap">
+    <div class="feature-hub-bar">
+      <button class="hub-btn" id="open-flashcards-btn" title="Open Smart Flashcards">
+        <span class="hub-btn-icon">🗂️</span>
+        <span class="hub-btn-text">Flashcards</span>
+      </button>
+      <button class="hub-btn" id="open-mistakes-btn" title="View Mistake Notebook">
+        <span class="hub-btn-icon">📓</span>
+        <span class="hub-btn-text">Mistake Notebook</span>
+        <span class="hub-badge" id="mistakes-count-badge">0</span>
+      </button>
+      <button class="hub-btn" id="open-revision-btn" title="Start Revision Mode">
+        <span class="hub-btn-icon">🔄</span>
+        <span class="hub-btn-text">Revision Mode</span>
+      </button>
+      <button class="hub-btn" id="open-dict-btn" title="Search Sanskrit Dictionary">
+        <span class="hub-btn-icon">📖</span>
+        <span class="hub-btn-text">Dictionary</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- SANSKRIT WORD OF THE DAY CARD (Deterministic Daily Selection) -->
+  <!-- ======================================================== -->
+  <section class="wotd-section-wrap">
+    <div class="wotd-card" id="wotd-card">
+      <div class="wotd-header">
+        <div class="wotd-header-left">
+          <span class="wotd-badge">✨ Word of the Day • अद्यतन शब्दः</span>
+          <span class="wotd-date" id="wotd-date-display">Today</span>
+        </div>
+        <button class="pronounce-btn" id="wotd-speak-btn" title="Pronounce Sanskrit Word">
+          <span class="pronounce-icon">🔊</span>
+          <span class="pronounce-text">Pronounce</span>
+        </button>
+      </div>
+
+      <div class="wotd-main">
+        <div class="wotd-word-wrap">
+          <h3 class="wotd-sanskrit" id="wotd-word-sanskrit">जलम्</h3>
+          <span class="wotd-category" id="wotd-word-category">वस्तु (Objects)</span>
+        </div>
+
+        <div class="wotd-meanings">
+          <div class="wotd-meaning-box hindi-meaning-box">
+            <span class="meaning-lang-tag">हिन्दी अर्थ</span>
+            <span class="meaning-val" id="wotd-word-hindi">पानी</span>
+          </div>
+          <div class="wotd-meaning-box english-meaning-box">
+            <span class="meaning-lang-tag">English Meaning</span>
+            <span class="meaning-val" id="wotd-word-english">Water</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="wotd-sentence-box">
+        <div class="sentence-sanskrit" id="wotd-sentence-sanskrit">बालकः जलं पिबति।</div>
+        <div class="sentence-meaning" id="wotd-sentence-meaning">लड़का पानी पीता है। (The boy drinks water.)</div>
+      </div>
+
+      <div class="wotd-actions">
+        <button class="wotd-action-btn" id="wotd-open-dict-btn">
+          <span>📖 Explore in Dictionary</span>
+        </button>
+        <button class="wotd-action-btn" id="wotd-practice-card-btn">
+          <span>🗂️ Practice in Flashcards</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
   <!-- Overall Progress Banner -->
   <section class="progress-banner-wrap">
     <div class="progress-banner">
@@ -415,6 +490,299 @@
       </div>
       
       <div class="badges-grid" id="badges-grid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SMART FLASHCARDS MODAL -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="flashcards-modal" aria-hidden="true">
+    <div class="flashcards-modal-card">
+      <div class="flashcards-header">
+        <div class="flashcards-header-info">
+          <h3 class="flashcards-title">🗂️ Sanskrit Smart Flashcards</h3>
+          <p class="flashcards-subtitle">Flip to reveal meanings & classify into your study deck</p>
+        </div>
+        <button class="close-modal-btn" id="close-flashcards-btn">&times;</button>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="flashcard-filter-bar">
+        <button class="fc-filter-btn active" data-filter="all">All Words (<span id="fc-count-all">0</span>)</button>
+        <button class="fc-filter-btn" data-filter="practice">🔴 Needs Practice (<span id="fc-count-practice">0</span>)</button>
+        <button class="fc-filter-btn" data-filter="learning">🟡 Learning (<span id="fc-count-learning">0</span>)</button>
+        <button class="fc-filter-btn" data-filter="known">🟢 Known (<span id="fc-count-known">0</span>)</button>
+        <button class="fc-shuffle-btn" id="fc-shuffle-btn" title="Shuffle Card Deck">🔀 Shuffle</button>
+      </div>
+
+      <!-- Progress / Counter -->
+      <div class="fc-deck-status">
+        <span id="fc-card-counter">Card 1 of 45</span>
+        <div class="fc-progress-bar-bg">
+          <div class="fc-progress-bar-fill" id="fc-progress-bar-fill" style="width: 2%;"></div>
+        </div>
+      </div>
+
+      <!-- 3D Flip Card Container -->
+      <div class="flashcard-scene" id="flashcard-scene">
+        <div class="flashcard-inner" id="flashcard-inner">
+          
+          <!-- Front Face -->
+          <div class="flashcard-face flashcard-front">
+            <div class="fc-card-tag" id="fc-front-category">वस्तु (Objects)</div>
+            <h2 class="fc-sanskrit-word" id="fc-front-word">जलम्</h2>
+            <button class="fc-speak-btn" id="fc-speak-btn" title="Pronounce Word">🔊 Pronounce</button>
+            <div class="fc-flip-hint">👆 Click or tap card to flip & reveal meaning</div>
+          </div>
+
+          <!-- Back Face -->
+          <div class="flashcard-face flashcard-back">
+            <div class="fc-back-meanings">
+              <div class="fc-back-item">
+                <span class="fc-back-label">हिन्दी अर्थ</span>
+                <span class="fc-back-val" id="fc-back-hindi">पानी</span>
+              </div>
+              <div class="fc-back-item">
+                <span class="fc-back-label">English Meaning</span>
+                <span class="fc-back-val" id="fc-back-english">Water</span>
+              </div>
+            </div>
+
+            <div class="fc-back-example">
+              <span class="fc-example-sanskrit" id="fc-back-example-sanskrit">बालकः जलं पिबति।</span>
+              <span class="fc-example-trans" id="fc-back-example-trans">लड़का पानी पीता है। (The boy drinks water.)</span>
+            </div>
+
+            <div class="fc-classification-bar">
+              <span class="fc-classify-label">Classify this word:</span>
+              <div class="fc-rating-buttons">
+                <button class="fc-rate-btn rate-practice" data-rating="practice" title="Needs Practice">🔴 Needs Practice</button>
+                <button class="fc-rate-btn rate-learning" data-rating="learning" title="Still Learning">🟡 Learning</button>
+                <button class="fc-rate-btn rate-known" data-rating="known" title="Mastered / Known">🟢 Known</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="fc-nav-bar">
+        <button class="fc-nav-arrow" id="fc-prev-btn">← Previous</button>
+        <button class="fc-flip-action-btn" id="fc-flip-action-btn">🔄 Flip Card</button>
+        <button class="fc-nav-arrow" id="fc-next-btn">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MISTAKE NOTEBOOK MODAL -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="mistakes-modal" aria-hidden="true">
+    <div class="mistakes-modal-card">
+      <div class="mistakes-header">
+        <div class="mistakes-header-info">
+          <h3 class="mistakes-title">📓 Mistake Notebook • दोष शोधनम्</h3>
+          <p class="mistakes-subtitle">Review questions missed during quizzes and test yourself with revision quizzes</p>
+        </div>
+        <button class="close-modal-btn" id="close-mistakes-btn">&times;</button>
+      </div>
+
+      <!-- Mistake Action & Filter Bar -->
+      <div class="mistakes-action-bar">
+        <div class="mistakes-filter-tabs">
+          <button class="mistake-filter-btn active" data-filter="all">All (<span id="mistakes-total-count">0</span>)</button>
+          <button class="mistake-filter-btn" data-filter="active">Needs Review (<span id="mistakes-active-count">0</span>)</button>
+          <button class="mistake-filter-btn" data-filter="mastered">Mastered (<span id="mistakes-mastered-count">0</span>)</button>
+        </div>
+        <button class="primary-btn start-mistake-quiz-btn" id="start-mistake-quiz-btn">
+          <span>🔄 Review My Mistakes Quiz</span>
+        </button>
+      </div>
+
+      <!-- Mistake List View -->
+      <div class="mistakes-list" id="mistakes-list">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
+      <!-- Interactive Mistake Practice Quiz View (Hidden by default) -->
+      <div class="mistake-quiz-view hidden" id="mistake-quiz-view">
+        <div class="mq-header">
+          <span class="mq-counter" id="mq-counter">Question 1 of 5</span>
+          <button class="mq-exit-btn" id="mq-exit-btn">Exit Mistake Quiz ✕</button>
+        </div>
+        <div class="mq-card">
+          <h4 class="mq-question" id="mq-question">Question text here</h4>
+          <div class="options-grid" id="mq-options-container">
+            <!-- Rendered dynamically -->
+          </div>
+          <div class="feedback-banner" id="mq-feedback" style="display: none;">
+            <span class="feedback-icon" id="mq-feedback-icon">💡</span>
+            <div class="feedback-text">
+              <strong id="mq-feedback-title">Explanation</strong>
+              <p id="mq-feedback-desc"></p>
+            </div>
+          </div>
+          <button class="primary-btn" id="mq-next-btn" style="display: none;">Next Mistake Question →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- REVISION MODE MODAL -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="revision-modal" aria-hidden="true">
+    <div class="revision-modal-card">
+      <div class="revision-header">
+        <div class="revision-header-info">
+          <h3 class="revision-title">🔄 Sanskrit Revision Mode • पुनरावृत्तिः</h3>
+          <p class="revision-subtitle">Sharpen your knowledge by topic without affecting official trail progress</p>
+        </div>
+        <button class="close-modal-btn" id="close-revision-btn">&times;</button>
+      </div>
+
+      <!-- Category Selection Grid -->
+      <div class="revision-categories-view" id="revision-categories-view">
+        <div class="revision-grid">
+          
+          <div class="revision-cat-card" data-cat="vocab">
+            <div class="cat-card-icon">📖</div>
+            <div class="cat-card-content">
+              <h4 class="cat-card-title">Vocabulary Revision</h4>
+              <p class="cat-card-desc">Everyday items, nature, fruits, house & family words</p>
+              <span class="cat-card-meta">10 Questions • शब्दावली</span>
+            </div>
+            <button class="cat-start-btn">Start Revision →</button>
+          </div>
+
+          <div class="revision-cat-card" data-cat="grammar">
+            <div class="cat-card-icon">📜</div>
+            <div class="cat-card-content">
+              <h4 class="cat-card-title">Grammar Revision</h4>
+              <p class="cat-card-desc">Dhatu Roop, Vibhaktis, sentence structures & Karaka</p>
+              <span class="cat-card-meta">10 Questions • व्याकरणम्</span>
+            </div>
+            <button class="cat-start-btn">Start Revision →</button>
+          </div>
+
+          <div class="revision-cat-card" data-cat="numbers">
+            <div class="cat-card-icon">🔢</div>
+            <div class="cat-card-content">
+              <h4 class="cat-card-title">Numbers Revision</h4>
+              <p class="cat-card-desc">Numbers 1–10, 11–50, and counting in sentences</p>
+              <span class="cat-card-meta">10 Questions • संख्याज्ञानम्</span>
+            </div>
+            <button class="cat-start-btn">Start Revision →</button>
+          </div>
+
+          <div class="revision-cat-card" data-cat="mixed">
+            <div class="cat-card-icon">🧩</div>
+            <div class="cat-card-content">
+              <h4 class="cat-card-title">Mixed Practice</h4>
+              <p class="cat-card-desc">Comprehensive test drawn from all syllabus topics</p>
+              <span class="cat-card-meta">10 Questions • मिश्रिताभ्यासः</span>
+            </div>
+            <button class="cat-start-btn">Start Revision →</button>
+          </div>
+
+          <div class="revision-cat-card" data-cat="mistakes">
+            <div class="cat-card-icon">📓</div>
+            <div class="cat-card-content">
+              <h4 class="cat-card-title">Mistake Revision</h4>
+              <p class="cat-card-desc">Dedicated practice quiz targeting questions you got wrong</p>
+              <span class="cat-card-meta" id="rev-mistakes-meta">Based on your mistake notebook</span>
+            </div>
+            <button class="cat-start-btn">Revise Mistakes →</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Revision Quiz Runner (Hidden by default) -->
+      <div class="revision-runner-view hidden" id="revision-runner-view">
+        <div class="rev-runner-top">
+          <div class="rev-runner-title-wrap">
+            <span class="rev-cat-badge" id="rev-runner-badge">Vocabulary Revision</span>
+            <span class="rev-runner-counter" id="rev-runner-counter">Question 1 of 10</span>
+          </div>
+          <button class="rev-exit-btn" id="rev-exit-btn">Exit Revision ✕</button>
+        </div>
+
+        <div class="rev-card">
+          <h4 class="rev-question-text" id="rev-question-text">Question text here</h4>
+          <div class="options-grid" id="rev-options-container">
+            <!-- Rendered dynamically -->
+          </div>
+          <div class="feedback-banner" id="rev-feedback" style="display: none;">
+            <span class="feedback-icon" id="rev-feedback-icon">💡</span>
+            <div class="feedback-text">
+              <strong id="rev-feedback-title">Explanation</strong>
+              <p id="rev-feedback-desc"></p>
+            </div>
+          </div>
+          <button class="primary-btn" id="rev-next-btn" style="display: none;">Next Revision Question →</button>
+        </div>
+      </div>
+
+      <!-- Revision Results View (Hidden by default) -->
+      <div class="revision-results-view hidden" id="revision-results-view">
+        <div class="rev-results-card">
+          <div class="rev-results-icon">🎯</div>
+          <h3 class="rev-results-headline">Revision Completed!</h3>
+          <p class="rev-results-sub">Great job revising your Sanskrit concepts.</p>
+          <div class="rev-score-banner">
+            <span class="rev-score-val" id="rev-score-display">8 / 10 Correct</span>
+            <span class="rev-score-pct" id="rev-pct-display">80% Accuracy</span>
+          </div>
+          <button class="primary-btn" id="rev-finish-btn">Back to Categories</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- SEARCHABLE SANSKRIT DICTIONARY MODAL -->
+  <!-- ======================================================== -->
+  <div class="modal-overlay" id="dictionary-modal" aria-hidden="true">
+    <div class="dictionary-modal-card">
+      <div class="dictionary-header">
+        <div class="dictionary-header-info">
+          <h3 class="dictionary-title">📖 Sanskrit Dictionary • संस्कृत शब्दकोशः</h3>
+          <p class="dictionary-subtitle">Search verified Sanskrit vocabulary with Hindi, English, and example sentences</p>
+        </div>
+        <button class="close-modal-btn" id="close-dictionary-btn">&times;</button>
+      </div>
+
+      <!-- Search & Category Filter Area -->
+      <div class="dict-search-bar-wrap">
+        <div class="dict-input-wrap">
+          <span class="dict-search-icon">🔍</span>
+          <input type="text" id="dict-search-input" placeholder="Search in Sanskrit (जलम्), English (water), or Hindi (पानी)..." autocomplete="off">
+          <button class="dict-clear-btn hidden" id="dict-clear-btn" title="Clear Search">✕</button>
+        </div>
+        
+        <div class="dict-category-pills" id="dict-category-pills">
+          <button class="dict-pill active" data-cat="all">All (45)</button>
+          <button class="dict-pill" data-cat="वस्तु (Objects)">वस्तु (Objects)</button>
+          <button class="dict-pill" data-cat="प्रकृति (Nature)">प्रकृति (Nature)</button>
+          <button class="dict-pill" data-cat="सम्बन्ध (Family)">सम्बन्ध (Family)</button>
+          <button class="dict-pill" data-cat="संख्या (Numbers)">संख्या (Numbers)</button>
+          <button class="dict-pill" data-cat="क्रिया (Verbs)">क्रिया (Verbs)</button>
+          <button class="dict-pill" data-cat="व्याकरण (Grammar)">व्याकरण (Grammar)</button>
+          <button class="dict-pill" data-cat="अभिवादन (Greetings)">अभिवादन (Greetings)</button>
+        </div>
+
+        <div class="dict-results-meta">
+          <span id="dict-results-count">Showing 45 of 45 words</span>
+        </div>
+      </div>
+
+      <!-- Dictionary Entries Grid -->
+      <div class="dict-entries-list" id="dict-entries-list">
         <!-- Rendered dynamically by script.js -->
       </div>
     </div>

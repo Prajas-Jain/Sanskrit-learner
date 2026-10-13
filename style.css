@@ -2062,3 +2062,1351 @@ body {
     font-size: 13px;
   }
 }
+
+/* ==========================================================================
+   PHASE 1 LEARNING TOOLS STYLES: Hub, WOTD, Flashcards, Mistakes, Revision, Dict
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Feature Hub Bar
+   -------------------------------------------------------------------------- */
+.feature-hub-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 18px auto 6px auto;
+  padding: 0 16px;
+}
+
+.feature-hub-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.06);
+}
+
+.hub-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 4px rgba(99, 102, 241, 0.04);
+  position: relative;
+}
+
+.hub-btn:hover {
+  border-color: var(--border-purple);
+  color: var(--primary-purple);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  background: #f5f3ff;
+}
+
+.hub-btn:active {
+  transform: translateY(0);
+}
+
+.hub-btn-icon {
+  font-size: 16px;
+}
+
+.hub-badge {
+  background: #ef4444;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  min-width: 18px;
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Sanskrit Word of the Day (WOTD) Card
+   -------------------------------------------------------------------------- */
+.wotd-section-wrap {
+  width: 100%;
+  max-width: 900px;
+  margin: 12px auto 16px auto;
+  padding: 0 16px;
+}
+
+.wotd-card {
+  background: linear-gradient(135deg, #ffffff, #faf5ff);
+  border: 2px solid #ddd6fe;
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wotd-card::before {
+  content: "ॐ";
+  position: absolute;
+  right: 18px;
+  top: 10px;
+  font-family: var(--font-sanskrit);
+  font-size: 80px;
+  color: rgba(124, 58, 237, 0.05);
+  pointer-events: none;
+}
+
+.wotd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wotd-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wotd-badge {
+  background: var(--bg-card-lavender);
+  border: 1px solid var(--border-purple);
+  color: var(--primary-purple);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.wotd-date {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.pronounce-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1.5px solid var(--border-purple);
+  color: var(--primary-purple);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 4px rgba(124, 58, 237, 0.08);
+}
+
+.pronounce-btn:hover {
+  background: #f5f3ff;
+  transform: scale(1.03);
+}
+
+.wotd-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.wotd-word-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.wotd-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.wotd-category {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.wotd-meanings {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wotd-meaning-box {
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 130px;
+}
+
+.hindi-meaning-box {
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+}
+
+.english-meaning-box {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+}
+
+.meaning-lang-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.meaning-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.wotd-sentence-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sentence-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-purple);
+}
+
+.sentence-meaning {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.wotd-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.wotd-action-btn {
+  background: #ffffff;
+  border: 1.5px solid var(--border-light);
+  color: var(--text-main);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wotd-action-btn:hover {
+  border-color: var(--border-purple);
+  color: var(--primary-purple);
+  background: #f5f3ff;
+}
+
+/* --------------------------------------------------------------------------
+   Smart Flashcards Styles
+   -------------------------------------------------------------------------- */
+.flashcards-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 24px;
+  gap: 16px;
+}
+
+.flashcards-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flashcards-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.flashcards-subtitle {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.flashcard-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fc-filter-btn {
+  padding: 6px 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fc-filter-btn:hover {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.fc-filter-btn.active {
+  background: #7c3aed;
+  border-color: #7c3aed;
+  color: #ffffff;
+}
+
+.fc-shuffle-btn {
+  margin-left: auto;
+  padding: 6px 12px;
+  background: #ffffff;
+  border: 1.5px solid #ddd6fe;
+  color: #7c3aed;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fc-shuffle-btn:hover {
+  background: #f5f3ff;
+  transform: rotate(5deg);
+}
+
+.fc-deck-status {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.fc-progress-bar-bg {
+  width: 100%;
+  height: 6px;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.fc-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #0284c7);
+  transition: width 0.3s ease;
+}
+
+/* 3D Flip Card Container */
+.flashcard-scene {
+  width: 100%;
+  height: 250px;
+  perspective: 1000px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.flashcard-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.12);
+}
+
+.flashcard-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.flashcard-front {
+  background: linear-gradient(135deg, #ffffff, #faf5ff);
+  border: 2px solid #ddd6fe;
+  gap: 12px;
+}
+
+.fc-card-tag {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #7c3aed;
+  background: #ede9fe;
+  padding: 3px 10px;
+  border-radius: 9999px;
+}
+
+.fc-sanskrit-word {
+  font-family: var(--font-sanskrit);
+  font-size: 44px;
+  font-weight: 800;
+  color: #1f2937;
+  letter-spacing: 0.5px;
+}
+
+.fc-speak-btn {
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+  color: #7c3aed;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fc-speak-btn:hover {
+  background: #f5f3ff;
+  transform: scale(1.05);
+}
+
+.fc-flip-hint {
+  font-size: 11.5px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.flashcard-back {
+  background: #ffffff;
+  border: 2px solid #bbf7d0;
+  transform: rotateY(180deg);
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fc-back-meanings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.fc-back-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-back-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #6b7280;
+  text-transform: uppercase;
+}
+
+.fc-back-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.fc-back-example {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.fc-example-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 15px;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.fc-example-trans {
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.fc-classification-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.fc-classify-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.fc-rating-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.fc-rate-btn {
+  flex: 1;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.rate-practice {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+.rate-practice:hover {
+  background: #fca5a5;
+  color: #7f1d1d;
+}
+
+.rate-learning {
+  background: #fef3c7;
+  color: #b45309;
+  border-color: #fde68a;
+}
+.rate-learning:hover {
+  background: #fde047;
+  color: #78350f;
+}
+
+.rate-known {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+.rate-known:hover {
+  background: #86efac;
+  color: #14532d;
+}
+
+.fc-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fc-nav-arrow {
+  padding: 8px 16px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fc-nav-arrow:hover {
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.fc-flip-action-btn {
+  padding: 8px 16px;
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+  color: #7c3aed;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.fc-flip-action-btn:hover {
+  background: #ede9fe;
+}
+
+/* --------------------------------------------------------------------------
+   Mistake Notebook Styles
+   -------------------------------------------------------------------------- */
+.mistakes-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.mistakes-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mistakes-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.mistakes-subtitle {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.mistakes-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mistakes-filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mistake-filter-btn {
+  padding: 6px 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.mistake-filter-btn.active {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.start-mistake-quiz-btn {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.start-mistake-quiz-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.mistakes-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 4px;
+}
+
+.mistake-card {
+  background: #ffffff;
+  border: 1.5px solid #fee2e2;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.15s ease;
+}
+
+.mistake-card.mastered {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+}
+
+.mistake-card-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mistake-q-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.mistake-status-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.mistake-status-tag.active {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.mistake-status-tag.mastered {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.mistake-answers-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.ans-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.ans-wrong {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+}
+
+.ans-correct {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.mistake-explanation-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  color: #475569;
+  line-height: 1.4;
+}
+
+.mistake-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.mistake-meta-txt {
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+.toggle-mastered-btn {
+  background: none;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggle-mastered-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.mistakes-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+}
+
+.empty-state-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.empty-state-desc {
+  font-size: 13px;
+  color: #6b7280;
+  max-width: 380px;
+}
+
+/* --------------------------------------------------------------------------
+   Revision Mode Styles
+   -------------------------------------------------------------------------- */
+.revision-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 680px;
+  max-height: 88vh;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.revision-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.revision-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.revision-subtitle {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.revision-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.revision-cat-card {
+  background: #ffffff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.revision-cat-card:hover {
+  border-color: #7c3aed;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.08);
+  transform: translateY(-2px);
+}
+
+.cat-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f5f3ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.cat-card-content {
+  flex: 1;
+}
+
+.cat-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 2px;
+}
+
+.cat-card-desc {
+  font-size: 12.5px;
+  color: #6b7280;
+  margin-bottom: 4px;
+}
+
+.cat-card-meta {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #7c3aed;
+}
+
+.cat-start-btn {
+  padding: 8px 14px;
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+  color: #7c3aed;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.revision-cat-card:hover .cat-start-btn {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+/* Revision Quiz Runner View */
+.rev-runner-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.rev-cat-badge {
+  font-size: 12px;
+  font-weight: 800;
+  color: #7c3aed;
+  background: #f5f3ff;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid #ddd6fe;
+}
+
+.rev-runner-counter {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.rev-exit-btn {
+  background: none;
+  border: 1px solid #e5e7eb;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.rev-exit-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.rev-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rev-question-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.rev-results-card {
+  text-align: center;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.rev-results-icon {
+  font-size: 52px;
+}
+
+.rev-results-headline {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.rev-results-sub {
+  font-size: 13.5px;
+  color: #6b7280;
+}
+
+.rev-score-banner {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 12px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0;
+}
+
+.rev-score-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: #16a34a;
+}
+
+.rev-score-pct {
+  font-size: 13px;
+  font-weight: 700;
+  color: #15803d;
+}
+
+/* --------------------------------------------------------------------------
+   Searchable Sanskrit Dictionary Styles
+   -------------------------------------------------------------------------- */
+.dictionary-modal-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 720px;
+  max-height: 88vh;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 14px;
+  overflow: hidden;
+}
+
+.dictionary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dictionary-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.dictionary-subtitle {
+  font-size: 12.5px;
+  color: #6b7280;
+}
+
+.dict-search-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dict-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 14px;
+  transition: all 0.15s ease;
+}
+
+.dict-input-wrap:focus-within {
+  background: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.dict-search-icon {
+  font-size: 16px;
+  color: #94a3b8;
+}
+
+#dict-search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.dict-clear-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.dict-category-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.dict-pill {
+  padding: 4px 10px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #475569;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dict-pill.active {
+  background: #7c3aed;
+  border-color: #7c3aed;
+  color: #ffffff;
+}
+
+.dict-results-meta {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.dict-entries-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.dict-card {
+  background: #ffffff;
+  border: 1.5px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.dict-card:hover {
+  border-color: #ddd6fe;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.05);
+  background: #faf5ff;
+}
+
+.dict-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dict-word-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.dict-word-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 24px;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.dict-word-cat {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7c3aed;
+  background: #ede9fe;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.dict-speak-btn {
+  background: none;
+  border: 1px solid #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.15s ease;
+}
+
+.dict-speak-btn:hover {
+  background: #f1f5f9;
+}
+
+.dict-meanings-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13.5px;
+}
+
+.dict-m-hindi {
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.dict-m-english {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.dict-example-box {
+  background: #f8fafc;
+  border-left: 3px solid #7c3aed;
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dict-ex-sanskrit {
+  font-family: var(--font-sanskrit);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0284c7;
+}
+
+.dict-ex-trans {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* Responsive adjustments for Phase 1 components */
+@media (max-width: 680px) {
+  .feature-hub-bar {
+    gap: 8px;
+    padding: 8px 10px;
+  }
+
+  .hub-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .wotd-card {
+    padding: 16px;
+  }
+
+  .wotd-sanskrit {
+    font-size: 28px;
+  }
+
+  .wotd-meanings {
+    width: 100%;
+  }
+
+  .wotd-meaning-box {
+    flex: 1;
+    min-width: 110px;
+  }
+
+  .flashcard-scene {
+    height: 270px;
+  }
+
+  .fc-sanskrit-word {
+    font-size: 34px;
+  }
+
+  .fc-rating-buttons {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .revision-cat-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cat-start-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

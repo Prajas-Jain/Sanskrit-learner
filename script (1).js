@@ -1115,6 +1115,57 @@ const LESSONS_DATA = [
 ];
 
 // ==========================================================================
+// 1.5 SANSKRIT DICTIONARY & FLASHCARDS DATASET (45 Curated & Verified Words)
+// ==========================================================================
+const SANSKRIT_DICTIONARY = [
+  { id: 1, sanskrit: "जलम्", hindi: "पानी", english: "Water", category: "वस्तु (Objects)", example: "बालकः जलं पिबति।", exampleMeaning: "लड़का पानी पीता है। (The boy drinks water.)" },
+  { id: 2, sanskrit: "फलम्", hindi: "फल", english: "Fruit", category: "वस्तु (Objects)", example: "वृक्षेषु मधुरं फलं भवति।", exampleMeaning: "पेड़ों पर मीठे फल होते हैं। (Sweet fruits grow on trees.)" },
+  { id: 3, sanskrit: "पुस्तकम्", hindi: "किताब", english: "Book", category: "वस्तु (Objects)", example: "छात्राः पुस्तकं पठन्ति।", exampleMeaning: "छात्र किताब पढ़ते हैं। (Students read the book.)" },
+  { id: 4, sanskrit: "गृहम्", hindi: "घर", english: "House", category: "वस्तु (Objects)", example: "मम गृहं सुन्दरम् अस्ति।", exampleMeaning: "मेरा घर सुंदर है। (My house is beautiful.)" },
+  { id: 5, sanskrit: "विद्यालयः", hindi: "विद्यालय / पाठशाला", english: "School", category: "वस्तु (Objects)", example: "बालकाः विद्यालयं गच्छन्ति।", exampleMeaning: "लड़के स्कूल जाते हैं। (Boys go to school.)" },
+  { id: 6, sanskrit: "वृक्षः", hindi: "पेड़", english: "Tree", category: "प्रकृति (Nature)", example: "वृक्षात् फलानि पतन्ति।", exampleMeaning: "पेड़ से फल गिरते हैं। (Fruits fall from the tree.)" },
+  { id: 7, sanskrit: "मित्रम्", hindi: "दोस्त / सखा", english: "Friend", category: "सम्बन्ध (Family)", example: "सः मम प्रियं मित्रम् अस्ति।", exampleMeaning: "वह मेरा प्रिय मित्र है। (He is my dear friend.)" },
+  { id: 8, sanskrit: "पुष्पम्", hindi: "फूल", english: "Flower", category: "प्रकृति (Nature)", example: "उद्याने रक्तं पुष्पं विकसति।", exampleMeaning: "बगीचे में लाल फूल खिलता है। (A red flower blooms in the garden.)" },
+  { id: 9, sanskrit: "सूर्यः", hindi: "सूरज", english: "Sun", category: "प्रकृति (Nature)", example: "सूर्यः पूर्वदिशि उदेति।", exampleMeaning: "सूर्य पूर्व दिशा में उगता है। (The sun rises in the east.)" },
+  { id: 10, sanskrit: "चन्द्रः", hindi: "चाँद", english: "Moon", category: "प्रकृति (Nature)", example: "रात्रौ चन्द्रः प्रकाशते।", exampleMeaning: "रात में चाँद चमकता है। (The moon shines at night.)" },
+  { id: 11, sanskrit: "माता", hindi: "माँ / जननी", english: "Mother", category: "सम्बन्ध (Family)", example: "माता बालकाय दुग्धं ददाति।", exampleMeaning: "माँ बच्चे को दूध देती है। (Mother gives milk to the child.)" },
+  { id: 12, sanskrit: "पिता", hindi: "पिताजी / जनक", english: "Father", category: "सम्बन्ध (Family)", example: "पिता पुत्रं प्रति स्नेहं करोति।", exampleMeaning: "पिता पुत्र से स्नेह करते हैं। (Father loves his son.)" },
+  { id: 13, sanskrit: "भ्राता", hindi: "भाई", english: "Brother", category: "सम्बन्ध (Family)", example: "मम भ्राता पठने चतुरः अस्ति।", exampleMeaning: "मेरा भाई पढ़ाई में होशियार है। (My brother is smart at studying.)" },
+  { id: 14, sanskrit: "भगिनी", hindi: "बहन", english: "Sister", category: "सम्बन्ध (Family)", example: "मम भगिनी मधुरं गायति।", exampleMeaning: "मेरी बहन मीठा गाती है। (My sister sings sweetly.)" },
+  { id: 15, sanskrit: "गुरुः", hindi: "अध्यापक / गुरु", english: "Teacher / Mentor", category: "सम्बन्ध (Family)", example: "गुरुः शिष्याय ज्ञानं यच्छति।", exampleMeaning: "गुरु शिष्य को ज्ञान देते हैं। (The teacher gives knowledge to the student.)" },
+  { id: 16, sanskrit: "बालकः", hindi: "लड़का", english: "Boy", category: "सम्बन्ध (Family)", example: "बालकः क्रीडाक्षेत्रे धावति।", exampleMeaning: "लड़का खेल के मैदान में दौड़ता है। (The boy runs in the playground.)" },
+  { id: 17, sanskrit: "बालिका", hindi: "लड़की", english: "Girl", category: "सम्बन्ध (Family)", example: "बालिका संस्कृतं पठति।", exampleMeaning: "लड़की संस्कृत पढ़ती है। (The girl studies Sanskrit.)" },
+  { id: 18, sanskrit: "गजः", hindi: "हाथी", english: "Elephant", category: "प्रकृति (Nature)", example: "गजः मन्दं मन्दं चलति।", exampleMeaning: "हाथी धीरे-धीरे चलता है। (The elephant walks slowly.)" },
+  { id: 19, sanskrit: "अश्वः", hindi: "घोड़ा", english: "Horse", category: "प्रकृति (Nature)", example: "अश्वः तीव्रम धावति।", exampleMeaning: "घोड़ा तेज दौड़ता है। (The horse runs fast.)" },
+  { id: 20, sanskrit: "मयूरः", hindi: "मोर", english: "Peacock", category: "प्रकृति (Nature)", example: "मयूरः वर्षाकाले नृत्यति।", exampleMeaning: "मोर वर्षा ऋतु में नाचता है। (The peacock dances in the rainy season.)" },
+  { id: 21, sanskrit: "पत्रम्", hindi: "पत्ता / चिट्ठी", english: "Leaf / Letter", category: "वस्तु (Objects)", example: "वृक्षात् हरितं पत्रं पतति।", exampleMeaning: "पेड़ से हरा पत्ता गिरता है। (A green leaf falls from the tree.)" },
+  { id: 22, sanskrit: "भोजनम्", hindi: "खाना / भोजन", english: "Food / Meal", category: "वस्तु (Objects)", example: "वयं समयं भोजनं कुर्मः।", exampleMeaning: "हम समय पर भोजन करते हैं। (We eat food on time.)" },
+  { id: 23, sanskrit: "दुग्धम्", hindi: "दूध", english: "Milk", category: "वस्तु (Objects)", example: "धेनुः मधुरं दुग्धं ददाति।", exampleMeaning: "गाय मीठा दूध देती है। (The cow gives sweet milk.)" },
+  { id: 24, sanskrit: "पठति", hindi: "पढ़ता है", english: "Reads", category: "क्रिया (Verbs)", example: "छात्रः मनोयोगेन पठति।", exampleMeaning: "छात्र मन लगाकर पढ़ता है। (The student reads attentively.)" },
+  { id: 25, sanskrit: "लिखति", hindi: "लिखता है", english: "Writes", category: "क्रिया (Verbs)", example: "सा सुन्दरं लिखति।", exampleMeaning: "वह सुंदर लिखती है। (She writes beautifully.)" },
+  { id: 26, sanskrit: "गच्छति", hindi: "जाता है", english: "Goes", category: "क्रिया (Verbs)", example: "सः नगरं गच्छति।", exampleMeaning: "वह शहर जाता है। (He goes to the city.)" },
+  { id: 27, sanskrit: "आगच्छति", hindi: "आता है", english: "Comes", category: "क्रिया (Verbs)", example: "अतिथिः गृहम् आगच्छति।", exampleMeaning: "मेहमान घर आते हैं। (The guest comes home.)" },
+  { id: 28, sanskrit: "खादति", hindi: "खाता है", english: "Eats", category: "क्रिया (Verbs)", example: "वानरः फलं खादति।", exampleMeaning: "बंदर फल खाता है। (The monkey eats fruit.)" },
+  { id: 29, sanskrit: "पिबति", hindi: "पीता है", english: "Drinks", category: "क्रिया (Verbs)", example: "मृगः जलं पिबति।", exampleMeaning: "हिरण पानी पीता है। (The deer drinks water.)" },
+  { id: 30, sanskrit: "नमस्करोति", hindi: "प्रणाम करता है", english: "Greets / Salutes", category: "क्रिया (Verbs)", example: "भक्तः देवं नमस्करोति।", exampleMeaning: "भक्त भगवान को प्रणाम करता है। (The devotee salutes the deity.)" },
+  { id: 31, sanskrit: "एकम् (1)", hindi: "एक (1)", english: "One (1)", category: "संख्या (Numbers)", example: "एकम् एव सत्यम् अस्ति।", exampleMeaning: "सत्य केवल एक है। (Truth is only one.)" },
+  { id: 32, sanskrit: "द्वे (2)", hindi: "दो (2)", english: "Two (2)", category: "संख्या (Numbers)", example: "द्वे नेत्रे पश्यतः।", exampleMeaning: "दो आँखें देखती हैं। (Two eyes see.)" },
+  { id: 33, sanskrit: "त्रीणि (3)", hindi: "तीन (3)", english: "Three (3)", category: "संख्या (Numbers)", example: "त्रिषु लोकेषु शान्तिः भवतु।", exampleMeaning: "तीनों लोकों में शांति हो। (May there be peace in three worlds.)" },
+  { id: 34, sanskrit: "चत्वारि (4)", hindi: "चार (4)", english: "Four (4)", category: "संख्या (Numbers)", example: "चत्वारः वेदाः सन्ति।", exampleMeaning: "चार वेद हैं। (There are four Vedas.)" },
+  { id: 35, sanskrit: "पञ्च (5)", hindi: "पाँच (5)", english: "Five (5)", category: "संख्या (Numbers)", example: "हस्ते पञ्च अङ्गुल्यः सन्ति।", exampleMeaning: "हाथ में पाँच उँगलियाँ हैं। (There are five fingers on the hand.)" },
+  { id: 36, sanskrit: "दश (10)", hindi: "दस (10)", english: "Ten (10)", category: "संख्या (Numbers)", example: "दश वादने विद्यालयः आरभते।", exampleMeaning: "दस बजे स्कूल शुरू होता है। (School starts at ten o clock.)" },
+  { id: 37, sanskrit: "सुप्रभातम", hindi: "शुभ प्रभात", english: "Good Morning", category: "अभिवादन (Greetings)", example: "भवद्भ्यः सुप्रभातम!", exampleMeaning: "आप सभी को शुभ प्रभात! (Good morning to all of you!)" },
+  { id: 38, sanskrit: "धन्यवादः", hindi: "धन्यवाद / आभार", english: "Thank You", category: "अभिवादन (Greetings)", example: "भवते कोटिशः धन्यवादः।", exampleMeaning: "आपका बहुत-बहुत धन्यवाद। (Thank you very much.)" },
+  { id: 39, sanskrit: "नमो नमः", hindi: "नमस्ते / प्रणाम", english: "Salutations / Hello", category: "अभिवादन (Greetings)", example: "सर्वेभ्यः नमो नमः।", exampleMeaning: "सभी को नमस्कार। (Salutations to everyone.)" },
+  { id: 40, sanskrit: "अत्र", hindi: "यहाँ", english: "Here", category: "व्याकरण (Grammar)", example: "अत्र आगच्छतु कृपया।", exampleMeaning: "कृपया यहाँ आइए। (Please come here.)" },
+  { id: 41, sanskrit: "तत्र", hindi: "वहाँ", english: "There", category: "व्याकरण (Grammar)", example: "तत्र एकः सुन्दरः वृक्षः अस्ति।", exampleMeaning: "वहाँ एक सुंदर पेड़ है। (There is a beautiful tree there.)" },
+  { id: 42, sanskrit: "सर्वत्र", hindi: "सब जगह", english: "Everywhere", category: "व्याकरण (Grammar)", example: "ईश्वरः सर्वत्र विद्यते।", exampleMeaning: "ईश्वर सर्वत्र विद्यमान हैं। (God is present everywhere.)" },
+  { id: 43, sanskrit: "किम्", hindi: "क्या", english: "What", category: "व्याकरण (Grammar)", example: "तव नाम किम् अस्ति?", exampleMeaning: "तुम्हारा नाम क्या है? (What is your name?) " },
+  { id: 44, sanskrit: "कुत्र", hindi: "कहाँ", english: "Where", category: "व्याकरण (Grammar)", example: "भवान् कुत्र वसति?", exampleMeaning: "आप कहाँ रहते हैं? (Where do you live?)" },
+  { id: 45, sanskrit: "कदा", hindi: "कब", english: "When", category: "व्याकरण (Grammar)", example: "भवान् कदा पठति?", exampleMeaning: "आप कब पढ़ते हैं? (When do you study?)" }
+];
+
+// ==========================================================================
 // 2. BADGES DEFINITIONS
 // ==========================================================================
 const BADGES_CONFIG = [
@@ -1176,7 +1227,14 @@ function getDefaultState() {
     completedLessons: [], // list of completed lesson IDs (1-9)
     currentLessonId: 1,   // current unlocked lesson pointer (1-9)
     earnedBadges: [],     // array of badge IDs
-    hasPerfectScore: false
+    hasPerfectScore: false,
+    mistakes: [],          // Mistake Notebook: array of missed questions
+    flashcardRatings: {},  // Smart Flashcards: { [word]: "known" | "learning" | "practice" }
+    revisionStats: {       // Revision Mode performance stats
+      quizzesCompleted: 0,
+      questionsAttempted: 0,
+      questionsCorrect: 0
+    }
   };
 }
 
@@ -1196,7 +1254,10 @@ function loadState() {
       completedLessons: Array.isArray(data.completedLessons) ? data.completedLessons : defaults.completedLessons,
       currentLessonId: (typeof data.currentLessonId === "number" && !isNaN(data.currentLessonId)) ? data.currentLessonId : defaults.currentLessonId,
       earnedBadges: Array.isArray(data.earnedBadges) ? data.earnedBadges : defaults.earnedBadges,
-      hasPerfectScore: Boolean(data.hasPerfectScore)
+      hasPerfectScore: Boolean(data.hasPerfectScore),
+      mistakes: Array.isArray(data.mistakes) ? data.mistakes : [],
+      flashcardRatings: (data.flashcardRatings && typeof data.flashcardRatings === "object") ? data.flashcardRatings : {},
+      revisionStats: (data.revisionStats && typeof data.revisionStats === "object") ? data.revisionStats : defaults.revisionStats
     };
 
     // Check and update streak based on calendar date
@@ -1313,6 +1374,47 @@ let elSoundToggleBtn = null;
 let elSoundIcon = null;
 let elSoundLabel = null;
 
+// Phase 1 Hub & Modals DOM Elements
+let elOpenFlashcardsBtn = null;
+let elOpenMistakesBtn = null;
+let elOpenRevisionBtn = null;
+let elOpenDictBtn = null;
+let elMistakesCountBadge = null;
+
+let elWotdSpeakBtn = null;
+let elWotdOpenDictBtn = null;
+let elWotdPracticeCardBtn = null;
+
+let elFlashcardsModal = null;
+let elCloseFlashcardsBtn = null;
+let elFlashcardInner = null;
+let elFcSpeakBtn = null;
+let elFcShuffleBtn = null;
+let elFcPrevBtn = null;
+let elFcNextBtn = null;
+let elFcFlipActionBtn = null;
+
+let elMistakesModal = null;
+let elCloseMistakesBtn = null;
+let elStartMistakeQuizBtn = null;
+let elMistakesList = null;
+let elMistakeQuizView = null;
+let elMqExitBtn = null;
+
+let elRevisionModal = null;
+let elCloseRevisionBtn = null;
+let elRevisionCategoriesView = null;
+let elRevisionRunnerView = null;
+let elRevisionResultsView = null;
+let elRevExitBtn = null;
+let elRevFinishBtn = null;
+
+let elDictionaryModal = null;
+let elCloseDictionaryBtn = null;
+let dictSearchInput = null;
+let dictClearBtn = null;
+let dictEntriesList = null;
+
 function ensureAudioControlsInDOM() {
   if (document.getElementById("audio-control-pill")) return;
   const headerStats = document.querySelector(".header-stats");
@@ -1404,6 +1506,52 @@ function initDOMElements() {
   elSoundToggleBtn = document.getElementById("sound-toggle-btn");
   elSoundIcon = document.getElementById("sound-icon");
   elSoundLabel = document.getElementById("sound-label");
+
+  // Phase 1 Hub buttons
+  elOpenFlashcardsBtn = document.getElementById("open-flashcards-btn");
+  elOpenMistakesBtn = document.getElementById("open-mistakes-btn");
+  elOpenRevisionBtn = document.getElementById("open-revision-btn");
+  elOpenDictBtn = document.getElementById("open-dict-btn");
+  elMistakesCountBadge = document.getElementById("mistakes-count-badge");
+
+  // Word of the Day buttons
+  elWotdSpeakBtn = document.getElementById("wotd-speak-btn");
+  elWotdOpenDictBtn = document.getElementById("wotd-open-dict-btn");
+  elWotdPracticeCardBtn = document.getElementById("wotd-practice-card-btn");
+
+  // Flashcards Modal elements
+  elFlashcardsModal = document.getElementById("flashcards-modal");
+  elCloseFlashcardsBtn = document.getElementById("close-flashcards-btn");
+  elFlashcardInner = document.getElementById("flashcard-inner");
+  elFcSpeakBtn = document.getElementById("fc-speak-btn");
+  elFcShuffleBtn = document.getElementById("fc-shuffle-btn");
+  elFcPrevBtn = document.getElementById("fc-prev-btn");
+  elFcNextBtn = document.getElementById("fc-next-btn");
+  elFcFlipActionBtn = document.getElementById("fc-flip-action-btn");
+
+  // Mistake Notebook Modal elements
+  elMistakesModal = document.getElementById("mistakes-modal");
+  elCloseMistakesBtn = document.getElementById("close-mistakes-btn");
+  elStartMistakeQuizBtn = document.getElementById("start-mistake-quiz-btn");
+  elMistakesList = document.getElementById("mistakes-list");
+  elMistakeQuizView = document.getElementById("mistake-quiz-view");
+  elMqExitBtn = document.getElementById("mq-exit-btn");
+
+  // Revision Mode Modal elements
+  elRevisionModal = document.getElementById("revision-modal");
+  elCloseRevisionBtn = document.getElementById("close-revision-btn");
+  elRevisionCategoriesView = document.getElementById("revision-categories-view");
+  elRevisionRunnerView = document.getElementById("revision-runner-view");
+  elRevisionResultsView = document.getElementById("revision-results-view");
+  elRevExitBtn = document.getElementById("rev-exit-btn");
+  elRevFinishBtn = document.getElementById("rev-finish-btn");
+
+  // Dictionary Modal elements
+  elDictionaryModal = document.getElementById("dictionary-modal");
+  elCloseDictionaryBtn = document.getElementById("close-dictionary-btn");
+  dictSearchInput = document.getElementById("dict-search-input");
+  dictClearBtn = document.getElementById("dict-clear-btn");
+  dictEntriesList = document.getElementById("dict-entries-list");
 }
 
 // ==========================================================================
@@ -1678,6 +1826,8 @@ function initApp() {
 
   try {
     updateStats();
+    initWordOfTheDay();
+    updateMistakesCountBadge();
   } catch (err) {
     console.error("Stats update error:", err);
   }
@@ -2078,6 +2228,9 @@ function checkAnswer(selectedIndex, clickedBtn) {
     // Trigger Gentle Daww... Sound Effect
     SoundController.playSfx("incorrect");
 
+    // Record to Mistake Notebook
+    recordQuizMistake(q, selectedIndex);
+
     elTestFeedback.className = "feedback-banner wrong-banner";
     elFeedbackIcon.textContent = "💡";
     elFeedbackTitle.textContent = "पुनः प्रयत्नं कुरु (Keep Learning!)";
@@ -2389,11 +2542,863 @@ function showToast(title, desc) {
 // 10. EVENT LISTENERS SETUP
 // ==========================================================================
 
+
+// ==========================================================================
+// 10. PHASE 1 CORE LEARNING ENGINES (Pronunciation, WOTD, Flashcards, Mistakes, Revision, Dict)
+// ==========================================================================
+
+/**
+ * 1. Sanskrit Speech Synthesis (Pronunciation)
+ */
+function speakSanskrit(text) {
+  if (!text) return;
+  if (!("speechSynthesis" in window)) {
+    showToast("🔊 Audio Notice", "Speech synthesis is not supported on this device.");
+    return;
+  }
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => (v.lang && (v.lang.startsWith("sa") || v.lang.startsWith("hi"))));
+    if (voice) {
+      utterance.voice = voice;
+      utterance.lang = voice.lang;
+    } else {
+      utterance.lang = "hi-IN"; // Hindi voice articulates Devanagari Sanskrit phonetically with high accuracy
+    }
+    utterance.rate = 0.85; // Clear enunciation for language learners
+    utterance.pitch = 1.0;
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {
+    console.warn("Speech synthesis notice:", err);
+  }
+}
+
+/**
+ * 2. Sanskrit Word of the Day (Deterministic Calendar Date Selection)
+ */
+function getWordOfTheDay() {
+  const today = new Date().toISOString().split("T")[0]; // "YYYY-MM-DD"
+  let hash = 0;
+  for (let i = 0; i < today.length; i++) {
+    hash = (hash * 31 + today.charCodeAt(i)) % SANSKRIT_DICTIONARY.length;
+  }
+  return SANSKRIT_DICTIONARY[Math.abs(hash)];
+}
+
+function initWordOfTheDay() {
+  const wotd = getWordOfTheDay();
+  if (!wotd) return;
+
+  const wotdWordSanskrit = document.getElementById("wotd-word-sanskrit");
+  const wotdWordCategory = document.getElementById("wotd-word-category");
+  const wotdWordHindi = document.getElementById("wotd-word-hindi");
+  const wotdWordEnglish = document.getElementById("wotd-word-english");
+  const wotdSentenceSanskrit = document.getElementById("wotd-sentence-sanskrit");
+  const wotdSentenceMeaning = document.getElementById("wotd-sentence-meaning");
+  const wotdDateDisplay = document.getElementById("wotd-date-display");
+
+  if (wotdWordSanskrit) wotdWordSanskrit.textContent = wotd.sanskrit;
+  if (wotdWordCategory) wotdWordCategory.textContent = wotd.category;
+  if (wotdWordHindi) wotdWordHindi.textContent = wotd.hindi;
+  if (wotdWordEnglish) wotdWordEnglish.textContent = wotd.english;
+  if (wotdSentenceSanskrit) wotdSentenceSanskrit.textContent = wotd.example;
+  if (wotdSentenceMeaning) wotdSentenceMeaning.textContent = wotd.exampleMeaning;
+  if (wotdDateDisplay) {
+    const d = new Date();
+    wotdDateDisplay.textContent = d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  // Bind actions
+  if (elWotdSpeakBtn) {
+    elWotdSpeakBtn.onclick = () => speakSanskrit(wotd.sanskrit);
+  }
+  if (elWotdOpenDictBtn) {
+    elWotdOpenDictBtn.onclick = () => {
+      openDictionaryModal(wotd.sanskrit);
+    };
+  }
+  if (elWotdPracticeCardBtn) {
+    elWotdPracticeCardBtn.onclick = () => {
+      openFlashcardsModal(wotd.sanskrit);
+    };
+  }
+}
+
+/**
+ * 3. Smart Flashcards Engine
+ */
+let fcCurrentIndex = 0;
+let fcActiveCards = [];
+let fcCurrentFilter = "all";
+
+function initFlashcards() {
+  updateFlashcardFilterCounts();
+  setFlashcardsFilter("all");
+}
+
+function updateFlashcardFilterCounts() {
+  const ratings = appState.flashcardRatings || {};
+  let practiceCount = 0;
+  let learningCount = 0;
+  let knownCount = 0;
+
+  SANSKRIT_DICTIONARY.forEach(item => {
+    const r = ratings[item.sanskrit];
+    if (r === "practice") practiceCount++;
+    else if (r === "learning") learningCount++;
+    else if (r === "known") knownCount++;
+  });
+
+  const elAll = document.getElementById("fc-count-all");
+  const elPractice = document.getElementById("fc-count-practice");
+  const elLearning = document.getElementById("fc-count-learning");
+  const elKnown = document.getElementById("fc-count-known");
+
+  if (elAll) elAll.textContent = SANSKRIT_DICTIONARY.length;
+  if (elPractice) elPractice.textContent = practiceCount;
+  if (elLearning) elLearning.textContent = learningCount;
+  if (elKnown) elKnown.textContent = knownCount;
+}
+
+function setFlashcardsFilter(filter) {
+  fcCurrentFilter = filter;
+  const ratings = appState.flashcardRatings || {};
+
+  if (filter === "all") {
+    fcActiveCards = [...SANSKRIT_DICTIONARY];
+  } else {
+    fcActiveCards = SANSKRIT_DICTIONARY.filter(item => ratings[item.sanskrit] === filter);
+  }
+
+  fcCurrentIndex = 0;
+  // Update filter tab styling
+  document.querySelectorAll(".fc-filter-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.filter === filter);
+  });
+
+  renderFlashcard();
+}
+
+function renderFlashcard() {
+  const scene = document.getElementById("flashcard-scene");
+  const inner = document.getElementById("flashcard-inner");
+  const counter = document.getElementById("fc-card-counter");
+  const barFill = document.getElementById("fc-progress-bar-fill");
+
+  if (inner) inner.classList.remove("is-flipped");
+
+  if (!fcActiveCards || fcActiveCards.length === 0) {
+    if (counter) counter.textContent = "0 Cards in this Deck";
+    if (barFill) barFill.style.width = "0%";
+    const frontWord = document.getElementById("fc-front-word");
+    const frontCat = document.getElementById("fc-front-category");
+    if (frontWord) frontWord.textContent = "पत्राणि नास्ति";
+    if (frontCat) frontCat.textContent = "Empty Deck";
+    return;
+  }
+
+  if (fcCurrentIndex >= fcActiveCards.length) fcCurrentIndex = 0;
+  if (fcCurrentIndex < 0) fcCurrentIndex = fcActiveCards.length - 1;
+
+  const card = fcActiveCards[fcCurrentIndex];
+  const total = fcActiveCards.length;
+
+  if (counter) counter.textContent = `Card ${fcCurrentIndex + 1} of ${total}`;
+  if (barFill) barFill.style.width = `${Math.round(((fcCurrentIndex + 1) / total) * 100)}%`;
+
+  const frontCategory = document.getElementById("fc-front-category");
+  const frontWord = document.getElementById("fc-front-word");
+  const backHindi = document.getElementById("fc-back-hindi");
+  const backEnglish = document.getElementById("fc-back-english");
+  const backExSanskrit = document.getElementById("fc-back-example-sanskrit");
+  const backExTrans = document.getElementById("fc-back-example-trans");
+
+  if (frontCategory) frontCategory.textContent = card.category;
+  if (frontWord) frontWord.textContent = card.sanskrit;
+  if (backHindi) backHindi.textContent = card.hindi;
+  if (backEnglish) backEnglish.textContent = card.english;
+  if (backExSanskrit) backExSanskrit.textContent = card.example;
+  if (backExTrans) backExTrans.textContent = card.exampleMeaning;
+
+  // Pronounce button on card
+  if (elFcSpeakBtn) {
+    elFcSpeakBtn.onclick = (e) => {
+      e.stopPropagation();
+      speakSanskrit(card.sanskrit);
+    };
+  }
+}
+
+function flipFlashcard() {
+  if (elFlashcardInner) {
+    elFlashcardInner.classList.toggle("is-flipped");
+  }
+}
+
+function rateCurrentFlashcard(rating) {
+  if (!fcActiveCards || fcActiveCards.length === 0) return;
+  const card = fcActiveCards[fcCurrentIndex];
+  if (!card) return;
+
+  if (!appState.flashcardRatings) appState.flashcardRatings = {};
+  appState.flashcardRatings[card.sanskrit] = rating;
+  saveState(appState);
+
+  updateFlashcardFilterCounts();
+
+  // Short feedback toast
+  const labelMap = { practice: "🔴 Needs Practice", learning: "🟡 Still Learning", known: "🟢 Known / Mastered" };
+  showToast("🗂️ Flashcard Classified", `${card.sanskrit} marked as ${labelMap[rating] || rating}`);
+
+  // Automatically flip back and advance to next card after short delay
+  setTimeout(() => {
+    fcCurrentIndex++;
+    if (fcCurrentIndex >= fcActiveCards.length) fcCurrentIndex = 0;
+    renderFlashcard();
+  }, 200);
+}
+
+function shuffleFlashcardDeck() {
+  if (!fcActiveCards || fcActiveCards.length <= 1) return;
+  for (let i = fcActiveCards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [fcActiveCards[i], fcActiveCards[j]] = [fcActiveCards[j], fcActiveCards[i]];
+  }
+  fcCurrentIndex = 0;
+  renderFlashcard();
+  showToast("🔀 Deck Shuffled", "Flashcard order randomized for fresh practice!");
+}
+
+function openFlashcardsModal(targetWord) {
+  initFlashcards();
+  if (targetWord) {
+    const idx = fcActiveCards.findIndex(c => c.sanskrit === targetWord);
+    if (idx !== -1) fcCurrentIndex = idx;
+  }
+  renderFlashcard();
+  if (elFlashcardsModal) {
+    elFlashcardsModal.classList.add("active");
+    elFlashcardsModal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeFlashcardsModal() {
+  if (elFlashcardsModal) {
+    elFlashcardsModal.classList.remove("active");
+    elFlashcardsModal.setAttribute("aria-hidden", "true");
+  }
+}
+
+/**
+ * 4. Mistake Notebook Engine (Recording, Review, and Mistake Revision Quiz)
+ */
+function recordQuizMistake(questionObj, selectedIndex) {
+  if (!questionObj) return;
+  if (!Array.isArray(appState.mistakes)) appState.mistakes = [];
+
+  const mistakeEntry = {
+    id: Date.now() + Math.random(),
+    question: questionObj.question,
+    selectedAnswer: questionObj.options ? questionObj.options[selectedIndex] : "Selected Option",
+    correctAnswer: questionObj.options ? questionObj.options[questionObj.correctIndex] : "Correct Option",
+    options: questionObj.options || [],
+    correctIndex: questionObj.correctIndex,
+    explanation: questionObj.explanation || `Correct answer is: ${questionObj.options ? questionObj.options[questionObj.correctIndex] : ""}`,
+    lessonTitle: currentActiveLesson ? currentActiveLesson.title : "Sanskrit Lesson",
+    date: new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" }),
+    mastered: false
+  };
+
+  // Avoid creating duplicate unmastered entries for the exact same question
+  const existingIdx = appState.mistakes.findIndex(m => m.question === questionObj.question && !m.mastered);
+  if (existingIdx === -1) {
+    appState.mistakes.unshift(mistakeEntry);
+  } else {
+    appState.mistakes[existingIdx].selectedAnswer = mistakeEntry.selectedAnswer;
+    appState.mistakes[existingIdx].date = mistakeEntry.date;
+  }
+
+  saveState(appState);
+  updateMistakesCountBadge();
+}
+
+function updateMistakesCountBadge() {
+  const mistakes = Array.isArray(appState.mistakes) ? appState.mistakes : [];
+  const activeCount = mistakes.filter(m => !m.mastered).length;
+  if (elMistakesCountBadge) {
+    elMistakesCountBadge.textContent = activeCount;
+    elMistakesCountBadge.style.display = activeCount > 0 ? "inline-block" : "none";
+  }
+  const totalCountEl = document.getElementById("mistakes-total-count");
+  const activeCountEl = document.getElementById("mistakes-active-count");
+  const masteredCountEl = document.getElementById("mistakes-mastered-count");
+  if (totalCountEl) totalCountEl.textContent = mistakes.length;
+  if (activeCountEl) activeCountEl.textContent = activeCount;
+  if (masteredCountEl) masteredCountEl.textContent = mistakes.length - activeCount;
+}
+
+let currentMistakeFilter = "all";
+function renderMistakesList(filter = "all") {
+  currentMistakeFilter = filter;
+  updateMistakesCountBadge();
+  if (!elMistakesList) return;
+
+  const mistakes = Array.isArray(appState.mistakes) ? appState.mistakes : [];
+  let filtered = mistakes;
+  if (filter === "active") filtered = mistakes.filter(m => !m.mastered);
+  else if (filter === "mastered") filtered = mistakes.filter(m => m.mastered);
+
+  // Update tabs active state
+  document.querySelectorAll(".mistake-filter-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.filter === filter);
+  });
+
+  if (filtered.length === 0) {
+    elMistakesList.innerHTML = `
+      <div class="mistakes-empty-state">
+        <div class="empty-state-icon">🎉</div>
+        <h4 class="empty-state-title">No Mistakes Found!</h4>
+        <p class="empty-state-desc">${filter === "mastered" ? "You have not marked any mistakes as mastered yet." : "शाबाश! No mistakes recorded. When you miss any questions in quizzes, they will be logged here for easy review."}</p>
+      </div>
+    `;
+    return;
+  }
+
+  elMistakesList.innerHTML = "";
+  filtered.forEach(m => {
+    const card = document.createElement("div");
+    card.className = `mistake-card ${m.mastered ? "mastered" : ""}`;
+    card.innerHTML = `
+      <div class="mistake-card-top">
+        <h4 class="mistake-q-title">${m.question}</h4>
+        <span class="mistake-status-tag ${m.mastered ? "mastered" : "active"}">
+          ${m.mastered ? "✅ Mastered" : "⚠️ Needs Review"}
+        </span>
+      </div>
+      <div class="mistake-answers-row">
+        <span class="ans-badge ans-wrong">❌ Your Answer: ${m.selectedAnswer}</span>
+        <span class="ans-badge ans-correct">✅ Correct: ${m.correctAnswer}</span>
+      </div>
+      <div class="mistake-explanation-box">
+        💡 <strong>Explanation:</strong> ${m.explanation}
+      </div>
+      <div class="mistake-card-actions">
+        <span class="mistake-meta-txt">${m.lessonTitle} • ${m.date}</span>
+        <button class="toggle-mastered-btn" data-id="${m.id}">
+          ${m.mastered ? "Mark as Needs Review" : "Mark as Mastered ✅"}
+        </button>
+      </div>
+    `;
+
+    const toggleBtn = card.querySelector(".toggle-mastered-btn");
+    if (toggleBtn) {
+      toggleBtn.onclick = () => toggleMistakeMastered(m.id);
+    }
+    elMistakesList.appendChild(card);
+  });
+}
+
+function toggleMistakeMastered(id) {
+  const mistakes = Array.isArray(appState.mistakes) ? appState.mistakes : [];
+  const item = mistakes.find(m => m.id == id);
+  if (!item) return;
+
+  item.mastered = !item.mastered;
+  saveState(appState);
+  renderMistakesList(currentMistakeFilter);
+  showToast(item.mastered ? "✅ Marked as Mastered" : "⚠️ Marked as Needs Review", item.question);
+}
+
+// Interactive Mistake Practice Quiz
+let mqQuestions = [];
+let mqCurrentIndex = 0;
+let mqScore = 0;
+
+function startMistakeQuiz() {
+  const mistakes = Array.isArray(appState.mistakes) ? appState.mistakes : [];
+  const activeMistakes = mistakes.filter(m => !m.mastered);
+  if (activeMistakes.length === 0) {
+    showToast("🎉 Great Job!", "You have no active mistakes to revise!");
+    return;
+  }
+
+  mqQuestions = [...activeMistakes].slice(0, 5); // Take up to 5 mistakes
+  mqCurrentIndex = 0;
+  mqScore = 0;
+
+  if (elMistakesList) elMistakesList.style.display = "none";
+  const actionBar = document.querySelector(".mistakes-action-bar");
+  if (actionBar) actionBar.style.display = "none";
+  if (elMistakeQuizView) elMistakeQuizView.classList.remove("hidden");
+
+  // Duck music to quiz volume (15%)
+  SoundController.setQuizMode(true);
+  showMistakeQuestion();
+}
+
+function exitMistakeQuiz() {
+  if (elMistakesList) elMistakesList.style.display = "flex";
+  const actionBar = document.querySelector(".mistakes-action-bar");
+  if (actionBar) actionBar.style.display = "flex";
+  if (elMistakeQuizView) elMistakeQuizView.classList.add("hidden");
+
+  // Restore music to normal volume (40%)
+  SoundController.setQuizMode(false);
+  renderMistakesList(currentMistakeFilter);
+}
+
+function showMistakeQuestion() {
+  if (mqCurrentIndex >= mqQuestions.length) {
+    // Mistake quiz finished!
+    showToast("🏆 Mistake Quiz Completed", `You corrected questions in your review!`);
+    exitMistakeQuiz();
+    return;
+  }
+
+  const m = mqQuestions[mqCurrentIndex];
+  const counter = document.getElementById("mq-counter");
+  const qText = document.getElementById("mq-question");
+  const optsContainer = document.getElementById("mq-options-container");
+  const feedback = document.getElementById("mq-feedback");
+  const nextBtn = document.getElementById("mq-next-btn");
+
+  if (counter) counter.textContent = `Question ${mqCurrentIndex + 1} of ${mqQuestions.length}`;
+  if (qText) qText.textContent = m.question;
+  if (feedback) feedback.style.display = "none";
+  if (nextBtn) nextBtn.style.display = "none";
+
+  if (!optsContainer) return;
+  optsContainer.innerHTML = "";
+
+  const options = m.options && m.options.length === 4 ? m.options : [m.correctAnswer, m.selectedAnswer, "अन्य विकल्प (Other)", "कोऽपि न (None)"];
+  const badges = ["A", "B", "C", "D"];
+
+  options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.innerHTML = `<span class="option-badge">${badges[idx]}</span><span class="option-text">${opt}</span>`;
+    btn.onclick = () => {
+      optsContainer.querySelectorAll(".option-btn").forEach(b => (b.disabled = true));
+      const isCorrect = (opt === m.correctAnswer);
+      if (isCorrect) {
+        btn.classList.add("correct");
+        SoundController.playSfx("correct");
+        // Mark as mastered in notebook!
+        m.mastered = true;
+        saveState(appState);
+      } else {
+        btn.classList.add("wrong");
+        SoundController.playSfx("incorrect");
+      }
+
+      if (feedback) {
+        feedback.className = `feedback-banner ${isCorrect ? "correct-banner" : "wrong-banner"}`;
+        const fIcon = document.getElementById("mq-feedback-icon");
+        const fTitle = document.getElementById("mq-feedback-title");
+        const fDesc = document.getElementById("mq-feedback-desc");
+        if (fIcon) fIcon.textContent = isCorrect ? "🎉" : "💡";
+        if (fTitle) fTitle.textContent = isCorrect ? "उत्तमम्! Correctly Mastered!" : "पुनः प्रयत्नं कुरु (Keep Learning!)";
+        if (fDesc) fDesc.textContent = m.explanation;
+        feedback.style.display = "flex";
+      }
+
+      if (nextBtn) {
+        nextBtn.style.display = "flex";
+        nextBtn.onclick = () => {
+          mqCurrentIndex++;
+          showMistakeQuestion();
+        };
+      }
+    };
+    optsContainer.appendChild(btn);
+  });
+}
+
+function openMistakesModal() {
+  exitMistakeQuiz();
+  renderMistakesList("all");
+  if (elMistakesModal) {
+    elMistakesModal.classList.add("active");
+    elMistakesModal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeMistakesModal() {
+  exitMistakeQuiz();
+  if (elMistakesModal) {
+    elMistakesModal.classList.remove("active");
+    elMistakesModal.setAttribute("aria-hidden", "true");
+  }
+}
+
+/**
+ * 5. Sanskrit Revision Mode Engine (5 Topic Categories & Dedicated Runner)
+ */
+let revQuestions = [];
+let revCurrentIndex = 0;
+let revScore = 0;
+let revActiveCategory = "vocab";
+
+function getRevisionQuestions(category) {
+  const pool = [];
+  LESSONS_DATA.forEach(lesson => {
+    if (lesson.quiz && Array.isArray(lesson.quiz)) {
+      lesson.quiz.forEach(q => {
+        pool.push({ ...q, lessonTitle: lesson.title, unit: lesson.unit });
+      });
+    }
+  });
+
+  if (category === "vocab") {
+    // Lessons 1, 2, 3 (Units 1: Basic Words)
+    return pool.filter(q => q.unit === 1).slice(0, 10);
+  } else if (category === "grammar") {
+    // Lessons 7, 8, 9 (Unit 3: Grammar Basics)
+    return pool.filter(q => q.unit === 3).slice(0, 10);
+  } else if (category === "numbers") {
+    // Lessons 4, 5, 6 (Unit 2: Numbers)
+    return pool.filter(q => q.unit === 2).slice(0, 10);
+  } else if (category === "mistakes") {
+    // Drawn from Mistake Notebook
+    const mistakes = Array.isArray(appState.mistakes) ? appState.mistakes : [];
+    if (mistakes.length === 0) return pool.slice(0, 10);
+    return mistakes.slice(0, 10).map(m => ({
+      question: m.question,
+      options: m.options,
+      correctIndex: m.correctIndex,
+      explanation: m.explanation
+    }));
+  } else {
+    // Mixed Practice: shuffle pool and pick 10
+    const shuffled = [...pool];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled.slice(0, 10);
+  }
+}
+
+function startRevisionQuiz(category) {
+  revActiveCategory = category;
+  revQuestions = getRevisionQuestions(category);
+  revCurrentIndex = 0;
+  revScore = 0;
+
+  if (elRevisionCategoriesView) elRevisionCategoriesView.classList.add("hidden");
+  if (elRevisionResultsView) elRevisionResultsView.classList.add("hidden");
+  if (elRevisionRunnerView) elRevisionRunnerView.classList.remove("hidden");
+
+  // Reduce background music to 15% during revision quiz
+  SoundController.setQuizMode(true);
+  showRevisionQuestion();
+}
+
+function showRevisionQuestion() {
+  if (revCurrentIndex >= revQuestions.length) {
+    showRevisionResults();
+    return;
+  }
+
+  const q = revQuestions[revCurrentIndex];
+  const badge = document.getElementById("rev-runner-badge");
+  const counter = document.getElementById("rev-runner-counter");
+  const qText = document.getElementById("rev-question-text");
+  const optsContainer = document.getElementById("rev-options-container");
+  const feedback = document.getElementById("rev-feedback");
+  const nextBtn = document.getElementById("rev-next-btn");
+
+  const catNames = { vocab: "Vocabulary Revision", grammar: "Grammar Revision", numbers: "Numbers Revision", mixed: "Mixed Practice", mistakes: "Mistake Revision" };
+  if (badge) badge.textContent = catNames[revActiveCategory] || "Revision Quiz";
+  if (counter) counter.textContent = `Question ${revCurrentIndex + 1} of ${revQuestions.length}`;
+  if (qText) qText.textContent = q.question;
+  if (feedback) feedback.style.display = "none";
+  if (nextBtn) nextBtn.style.display = "none";
+
+  if (!optsContainer) return;
+  optsContainer.innerHTML = "";
+
+  const badges = ["A", "B", "C", "D"];
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.innerHTML = `<span class="option-badge">${badges[idx]}</span><span class="option-text">${opt}</span>`;
+    btn.onclick = () => {
+      optsContainer.querySelectorAll(".option-btn").forEach(b => (b.disabled = true));
+      const isCorrect = (idx === q.correctIndex);
+      if (isCorrect) {
+        btn.classList.add("correct");
+        revScore++;
+        SoundController.playSfx("correct");
+      } else {
+        btn.classList.add("wrong");
+        SoundController.playSfx("incorrect");
+        // Record mistake to notebook
+        recordQuizMistake(q, idx);
+      }
+
+      if (feedback) {
+        feedback.className = `feedback-banner ${isCorrect ? "correct-banner" : "wrong-banner"}`;
+        const fIcon = document.getElementById("rev-feedback-icon");
+        const fTitle = document.getElementById("rev-feedback-title");
+        const fDesc = document.getElementById("rev-feedback-desc");
+        if (fIcon) fIcon.textContent = isCorrect ? "🎉" : "💡";
+        if (fTitle) fTitle.textContent = isCorrect ? "उत्तमम्! Correct Answer!" : "पुनः प्रयत्नं कुरु (Keep Learning!)";
+        if (fDesc) fDesc.textContent = q.explanation;
+        feedback.style.display = "flex";
+      }
+
+      if (nextBtn) {
+        nextBtn.style.display = "flex";
+        nextBtn.onclick = () => {
+          revCurrentIndex++;
+          showRevisionQuestion();
+        };
+      }
+    };
+    optsContainer.appendChild(btn);
+  });
+}
+
+function showRevisionResults() {
+  if (elRevisionRunnerView) elRevisionRunnerView.classList.add("hidden");
+  if (elRevisionResultsView) elRevisionResultsView.classList.remove("hidden");
+
+  // Restore music to normal volume 40%
+  SoundController.setQuizMode(false);
+  SoundController.playSfx("complete");
+
+  const total = revQuestions.length;
+  const pct = Math.round((revScore / total) * 100);
+
+  const scoreEl = document.getElementById("rev-score-display");
+  const pctEl = document.getElementById("rev-pct-display");
+  if (scoreEl) scoreEl.textContent = `${revScore} / ${total} Correct`;
+  if (pctEl) pctEl.textContent = `${pct}% Accuracy`;
+
+  // Update revisionStats in localStorage
+  if (!appState.revisionStats) appState.revisionStats = { quizzesCompleted: 0, questionsAttempted: 0, questionsCorrect: 0 };
+  appState.revisionStats.quizzesCompleted = (appState.revisionStats.quizzesCompleted || 0) + 1;
+  appState.revisionStats.questionsAttempted = (appState.revisionStats.questionsAttempted || 0) + total;
+  appState.revisionStats.questionsCorrect = (appState.revisionStats.questionsCorrect || 0) + revScore;
+  saveState(appState);
+}
+
+function openRevisionModal() {
+  if (elRevisionCategoriesView) elRevisionCategoriesView.classList.remove("hidden");
+  if (elRevisionRunnerView) elRevisionRunnerView.classList.add("hidden");
+  if (elRevisionResultsView) elRevisionResultsView.classList.add("hidden");
+
+  // Update mistake card subtitle
+  const revMistakesMeta = document.getElementById("rev-mistakes-meta");
+  if (revMistakesMeta) {
+    const activeMistakes = (appState.mistakes || []).filter(m => !m.mastered).length;
+    revMistakesMeta.textContent = `${activeMistakes} active questions in your notebook`;
+  }
+
+  if (elRevisionModal) {
+    elRevisionModal.classList.add("active");
+    elRevisionModal.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closeRevisionModal() {
+  SoundController.setQuizMode(false);
+  if (elRevisionModal) {
+    elRevisionModal.classList.remove("active");
+    elRevisionModal.setAttribute("aria-hidden", "true");
+  }
+}
+
+/**
+ * 6. Searchable Sanskrit Dictionary Engine
+ */
+let dictActiveCategory = "all";
+let dictActiveSearch = "";
+
+function renderDictionaryList() {
+  if (!dictEntriesList) return;
+  const query = (dictActiveSearch || "").toLowerCase().trim();
+
+  let results = SANSKRIT_DICTIONARY.filter(item => {
+    // Category filter
+    if (dictActiveCategory !== "all" && item.category !== dictActiveCategory) {
+      return false;
+    }
+    // Search query matching Sanskrit, Hindi, or English
+    if (!query) return true;
+    return (
+      item.sanskrit.toLowerCase().includes(query) ||
+      item.hindi.toLowerCase().includes(query) ||
+      item.english.toLowerCase().includes(query) ||
+      (item.example && item.example.toLowerCase().includes(query))
+    );
+  });
+
+  const countMeta = document.getElementById("dict-results-count");
+  if (countMeta) {
+    countMeta.textContent = `Showing ${results.length} of ${SANSKRIT_DICTIONARY.length} words`;
+  }
+
+  if (results.length === 0) {
+    dictEntriesList.innerHTML = `
+      <div class="mistakes-empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <h4 class="empty-state-title">No Words Found</h4>
+        <p class="empty-state-desc">No entries matching "${escapeHtml(query)}". Try another word or clear filters.</p>
+      </div>
+    `;
+    return;
+  }
+
+  dictEntriesList.innerHTML = "";
+  results.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "dict-card";
+    card.innerHTML = `
+      <div class="dict-card-top">
+        <div class="dict-word-wrap">
+          <span class="dict-word-sanskrit">${item.sanskrit}</span>
+          <span class="dict-word-cat">${item.category}</span>
+        </div>
+        <button class="dict-speak-btn" data-word="${item.sanskrit}" title="Pronounce Word">🔊 Speak</button>
+      </div>
+      <div class="dict-meanings-row">
+        <span class="dict-m-hindi"><strong>हिन्दी:</strong> ${item.hindi}</span>
+        <span class="dict-m-english"><strong>English:</strong> ${item.english}</span>
+      </div>
+      <div class="dict-example-box">
+        <span class="dict-ex-sanskrit">${item.example}</span>
+        <span class="dict-ex-trans">${item.exampleMeaning}</span>
+      </div>
+    `;
+
+    const speakBtn = card.querySelector(".dict-speak-btn");
+    if (speakBtn) {
+      speakBtn.onclick = () => speakSanskrit(item.sanskrit);
+    }
+    dictEntriesList.appendChild(card);
+  });
+}
+
+function openDictionaryModal(initialSearch = "") {
+  dictActiveCategory = "all";
+  dictActiveSearch = initialSearch;
+  if (dictSearchInput) {
+    dictSearchInput.value = initialSearch;
+  }
+  if (dictClearBtn) {
+    dictClearBtn.classList.toggle("hidden", !initialSearch);
+  }
+  // Reset pills
+  document.querySelectorAll(".dict-pill").forEach(p => p.classList.toggle("active", p.dataset.cat === "all"));
+
+  renderDictionaryList();
+
+  if (elDictionaryModal) {
+    elDictionaryModal.classList.add("active");
+    elDictionaryModal.setAttribute("aria-hidden", "false");
+    if (dictSearchInput && !initialSearch) {
+      setTimeout(() => dictSearchInput.focus(), 150);
+    }
+  }
+}
+
+function closeDictionaryModal() {
+  if (elDictionaryModal) {
+    elDictionaryModal.classList.remove("active");
+    elDictionaryModal.setAttribute("aria-hidden", "true");
+  }
+}
+
 function setupEventListeners() {
   // Audio Controls
   if (elSoundToggleBtn) {
     elSoundToggleBtn.addEventListener("click", () => SoundController.toggleSound());
   }
+
+  // Phase 1 Hub Navigation Buttons
+  if (elOpenFlashcardsBtn) elOpenFlashcardsBtn.addEventListener("click", () => openFlashcardsModal());
+  if (elOpenMistakesBtn) elOpenMistakesBtn.addEventListener("click", () => openMistakesModal());
+  if (elOpenRevisionBtn) elOpenRevisionBtn.addEventListener("click", () => openRevisionModal());
+  if (elOpenDictBtn) elOpenDictBtn.addEventListener("click", () => openDictionaryModal());
+
+  // Flashcards Modal controls
+  if (elCloseFlashcardsBtn) elCloseFlashcardsBtn.addEventListener("click", closeFlashcardsModal);
+  if (elFlashcardInner) {
+    const scene = document.getElementById("flashcard-scene");
+    if (scene) scene.addEventListener("click", flipFlashcard);
+  }
+  if (elFcFlipActionBtn) elFcFlipActionBtn.addEventListener("click", flipFlashcard);
+  if (elFcShuffleBtn) elFcShuffleBtn.addEventListener("click", shuffleFlashcardDeck);
+  if (elFcPrevBtn) elFcPrevBtn.addEventListener("click", () => {
+    fcCurrentIndex--;
+    renderFlashcard();
+  });
+  if (elFcNextBtn) elFcNextBtn.addEventListener("click", () => {
+    fcCurrentIndex++;
+    renderFlashcard();
+  });
+  document.querySelectorAll(".fc-filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => setFlashcardsFilter(btn.dataset.filter));
+  });
+  document.querySelectorAll(".fc-rate-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      rateCurrentFlashcard(btn.dataset.rating);
+    });
+  });
+
+  // Mistake Notebook controls
+  if (elCloseMistakesBtn) elCloseMistakesBtn.addEventListener("click", closeMistakesModal);
+  if (elStartMistakeQuizBtn) elStartMistakeQuizBtn.addEventListener("click", startMistakeQuiz);
+  if (elMqExitBtn) elMqExitBtn.addEventListener("click", exitMistakeQuiz);
+  document.querySelectorAll(".mistake-filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => renderMistakesList(btn.dataset.filter));
+  });
+
+  // Revision Mode controls
+  if (elCloseRevisionBtn) elCloseRevisionBtn.addEventListener("click", closeRevisionModal);
+  if (elRevExitBtn) elRevExitBtn.addEventListener("click", () => {
+    SoundController.setQuizMode(false);
+    if (elRevisionCategoriesView) elRevisionCategoriesView.classList.remove("hidden");
+    if (elRevisionRunnerView) elRevisionRunnerView.classList.add("hidden");
+    if (elRevisionResultsView) elRevisionResultsView.classList.add("hidden");
+  });
+  if (elRevFinishBtn) elRevFinishBtn.addEventListener("click", () => {
+    if (elRevisionCategoriesView) elRevisionCategoriesView.classList.remove("hidden");
+    if (elRevisionResultsView) elRevisionResultsView.classList.add("hidden");
+  });
+  document.querySelectorAll(".revision-cat-card").forEach(card => {
+    card.addEventListener("click", () => startRevisionQuiz(card.dataset.cat));
+  });
+
+  // Dictionary Modal controls
+  if (elCloseDictionaryBtn) elCloseDictionaryBtn.addEventListener("click", closeDictionaryModal);
+  if (dictSearchInput) {
+    dictSearchInput.addEventListener("input", (e) => {
+      dictActiveSearch = e.target.value;
+      if (dictClearBtn) dictClearBtn.classList.toggle("hidden", !dictActiveSearch);
+      renderDictionaryList();
+    });
+  }
+  if (dictClearBtn) {
+    dictClearBtn.addEventListener("click", () => {
+      dictActiveSearch = "";
+      if (dictSearchInput) dictSearchInput.value = "";
+      dictClearBtn.classList.add("hidden");
+      renderDictionaryList();
+    });
+  }
+  document.querySelectorAll(".dict-pill").forEach(pill => {
+    pill.addEventListener("click", () => {
+      dictActiveCategory = pill.dataset.cat;
+      document.querySelectorAll(".dict-pill").forEach(p => p.classList.toggle("active", p === pill));
+      renderDictionaryList();
+    });
+  });
 
   // Lesson Modal buttons
   if (elCloseLessonBtn) elCloseLessonBtn.addEventListener("click", closeLesson);
@@ -2430,7 +3435,7 @@ function setupEventListeners() {
   if (elCloseBadgesBtn) elCloseBadgesBtn.addEventListener("click", closeBadgesModal);
 
   // Close modals when clicking backdrop
-  [elLessonModal, elTutorModal, elBadgesModal].forEach((modal) => {
+  [elLessonModal, elTutorModal, elBadgesModal, elFlashcardsModal, elMistakesModal, elRevisionModal, elDictionaryModal].forEach((modal) => {
     if (modal) {
       modal.addEventListener("click", (e) => {
         if (e.target === modal) {
@@ -2448,6 +3453,10 @@ function setupEventListeners() {
       closeLesson();
       closeAITutor();
       closeBadgesModal();
+      closeFlashcardsModal();
+      closeMistakesModal();
+      closeRevisionModal();
+      closeDictionaryModal();
     }
   });
 }
