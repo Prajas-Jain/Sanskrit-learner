@@ -2340,5 +2340,3 @@ function debounce(fn, wait) {
 
 // Start app when DOM is fully loaded
 document.addEventListener("DOMContentLoaded", initApp);
-script.js
-Displaying script.js.
